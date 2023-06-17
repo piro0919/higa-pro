@@ -1,0 +1,29 @@
+html {
+  @include mq.mq($until: tablet) {
+    font-size: 56.25%;
+  }
+  @include mq.mq($from: tablet) {
+    font-size: 62.5%;
+  }
+}
+
+body {
+  background: #ca0015;
+}
+
+* {
+  outline: none;
+}
+
+a {
+  cursor: pointer;
+}
+
+img,
+svg {
+  pointer-events: none;
+}
+
+ul {
+  list-style: none;
+}

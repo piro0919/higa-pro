@@ -1,0 +1,29 @@
+.drawer {
+  background: #018ccd !important;
+  height: calc(100dvh - 48px) !important;
+  padding: 32px 12px;
+  top: 48px !important;
+  width: 100% !important;
+  @include mq.mq($until: tablet) {
+    display: block;
+  }
+  @include mq.mq($from: tablet) {
+    display: none;
+  }
+}
+
+.nav {
+  font-size: 2rem;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.anchor {
+  color: #fff;
+  /* stylelint-disable-next-line csstree/validator */
+  font-size: min(16dvw, 8rem);
+}
