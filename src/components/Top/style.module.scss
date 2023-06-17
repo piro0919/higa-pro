@@ -1,11 +1,18 @@
 .wrapper {
   display: grid;
   position: relative;
+  @include mq.mq($until: tablet) {
+    margin: 48px 0 0;
+  }
+  @include mq.mq($from: tablet) {
+    margin: 64px 0 0;
+  }
 }
 
 .headerWrapper {
-  position: sticky;
+  position: fixed;
   top: 0;
+  width: 100%;
   z-index: 3;
 }
 
@@ -26,10 +33,10 @@
 
 .logoWrapper {
   /* stylelint-disable-next-line csstree/validator */
-  height: min(100dvmin, 800px);
+  height: min(calc(100dvmin - 24px), 800px);
   position: relative;
   /* stylelint-disable-next-line csstree/validator */
-  width: min(100dvmin, 800px);
+  width: min(calc(100dvmin - 24px), 800px);
 }
 
 .logo {
@@ -129,4 +136,8 @@
   @include mq.mq($from: tablet) {
     padding: 0 64px 0 12px;
   }
+}
+
+.scrollToTop:active {
+  transform: none !important;
 }
