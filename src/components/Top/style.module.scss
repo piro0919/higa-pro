@@ -122,6 +122,27 @@
   }
 }
 
+.swiperWrapper {
+  position: relative;
+  @include mq.mq($until: tablet) {
+    margin: 24px 0 0;
+  }
+  @include mq.mq($from: tablet) {
+    margin: 64px 0 0;
+  }
+}
+
+.swiper {
+  position: absolute;
+  width: 100%;
+}
+
+.swiperWrapper .articleContent {
+  inset: 0;
+  position: absolute;
+  z-index: 2;
+}
+
 .scrollToTop {
   background: #018ccd !important;
   border-radius: 0 !important;

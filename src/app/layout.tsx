@@ -4,6 +4,9 @@ import "pattern.css";
 import { ReactNode } from "react";
 import "react-modern-drawer/dist/index.css";
 import "ress";
+import "swiper/css";
+import "swiper/css/autoplay";
+// eslint-disable-next-line postcss-modules/no-unused-class
 import "./globals.scss";
 import "./mq-settings.scss";
 
