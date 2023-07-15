@@ -25,10 +25,18 @@ svg {
   pointer-events: none;
 }
 
+textarea {
+  resize: none;
+}
+
 ul {
   list-style: none;
 }
 
 .swiper-wrapper {
   transition-timing-function: linear !important;
+}
+
+.Toastify__toast-body {
+  font-size: 1.6rem;
 }

@@ -1,12 +1,15 @@
 "use client";
+import { ErrorMessage } from "@hookform/error-message";
 import {
   Archivo,
   Saira_Stencil_One as SairaStencilOne,
 } from "next/font/google";
 import Image from "next/image";
-import { useCallback, useMemo, useState } from "react";
+import { ReactNode, useCallback, useMemo, useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { Element } from "react-scroll";
 import ScrollToTop from "react-scroll-to-top";
+import TextareaAutosize from "react-textarea-autosize";
 import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperProps, SwiperSlide } from "swiper/react";
 import { useBoolean, useElementSize, useWindowSize } from "usehooks-ts";
@@ -19,7 +22,17 @@ import Header from "@/components/Header";
 const archivo = Archivo({ subsets: ["latin"] });
 const sairaStencilOne = SairaStencilOne({ subsets: ["latin"], weight: "400" });
 
-export default function Top(): JSX.Element {
+type FieldValues = {
+  content: string;
+  email: string;
+  name: string;
+};
+
+export type TopProps = {
+  onSubmit: SubmitHandler<FieldValues>;
+};
+
+export default function Top({ onSubmit }: TopProps): JSX.Element {
   const { height, width } = useWindowSize();
   const { setFalse: closeToggled, toggle, value: toggled } = useBoolean();
   const [ref, { height: headerHeight }] = useElementSize();
@@ -51,6 +64,17 @@ export default function Top(): JSX.Element {
   >(({ width }) => {
     setSwiperWidth(width);
   }, []);
+  const {
+    formState: { errors, isSubmitting },
+    handleSubmit,
+    register,
+  } = useForm<FieldValues>({
+    defaultValues: {
+      content: "",
+      email: "",
+      name: "",
+    },
+  });
 
   return (
     <>
@@ -168,7 +192,78 @@ export default function Top(): JSX.Element {
                   </h2>
                 </div>
                 <div className={styles.articleContent}>
-                  <div className={styles.articleText}>準備中</div>
+                  <div className={styles.formWrapper}>
+                    <form
+                      // eslint-disable-next-line @typescript-eslint/no-misused-promises
+                      onSubmit={handleSubmit(onSubmit)}
+                    >
+                      <div className={styles.filedsWrapper}>
+                        <label className={styles.label}>
+                          <span>お名前</span>
+                          <input
+                            {...register("name", {
+                              required: "お名前を入力してください。",
+                            })}
+                            className={styles.input}
+                          />
+                          <ErrorMessage
+                            errors={errors}
+                            name="name"
+                            render={({ message }): ReactNode => (
+                              <p className={styles.errorMessage}>{message}</p>
+                            )}
+                          />
+                        </label>
+                        <label className={styles.label}>
+                          <span>メールアドレス</span>
+                          <input
+                            {...register("email", {
+                              pattern: {
+                                message:
+                                  "正しいメールアドレス形式で入力してください。",
+                                value:
+                                  /^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$/,
+                              },
+                              required: "メールアドレスを入力してください。",
+                            })}
+                            className={styles.input}
+                          />
+                          <ErrorMessage
+                            errors={errors}
+                            name="email"
+                            render={({ message }): ReactNode => (
+                              <p className={styles.errorMessage}>{message}</p>
+                            )}
+                          />
+                        </label>
+                        <label className={styles.label}>
+                          <span>ご相談内容</span>
+                          <TextareaAutosize
+                            {...register("content", {
+                              required: "ご相談内容を入力してください。",
+                            })}
+                            className={styles.textarea}
+                            minRows={6}
+                          />
+                          <ErrorMessage
+                            errors={errors}
+                            name="content"
+                            render={({ message }): ReactNode => (
+                              <p className={styles.errorMessage}>{message}</p>
+                            )}
+                          />
+                        </label>
+                      </div>
+                      <div className={styles.buttonWrapper}>
+                        <button
+                          className={styles.button}
+                          disabled={isSubmitting}
+                        >
+                          送信する
+                        </button>
+                      </div>
+                    </form>
+                  </div>
                 </div>
               </div>
             </article>

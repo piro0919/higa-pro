@@ -3,6 +3,8 @@ import { IBM_Plex_Sans_JP as IBMPlexSansJP } from "next/font/google";
 import "pattern.css";
 import { ReactNode } from "react";
 import "react-modern-drawer/dist/index.css";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "ress";
 import "swiper/css";
 import "swiper/css/autoplay";
@@ -25,7 +27,10 @@ export type RootLayoutProps = {
 export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
   return (
     <html lang="ja">
-      <body className={iBMPlexSansJP.className}>{children}</body>
+      <body className={iBMPlexSansJP.className}>
+        {children}
+        <ToastContainer position="bottom-left" />
+      </body>
     </html>
   );
 }

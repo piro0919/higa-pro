@@ -1,5 +1,5 @@
-import Top from "@/components/Top";
+import Client from "./Client";
 
 export default function Page(): JSX.Element {
-  return <Top />;
+  return <Client />;
 }

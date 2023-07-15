@@ -143,6 +143,58 @@
   z-index: 2;
 }
 
+.formWrapper {
+  margin: 48px 0;
+  @include mq.mq($until: tablet) {
+    width: 100%;
+  }
+  @include mq.mq($from: tablet) {
+    width: 600px;
+  }
+}
+
+.filedsWrapper {
+  display: grid;
+  gap: 36px;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.input,
+.textarea {
+  background: #eee;
+  border-radius: 8px;
+  padding: 4px 8px;
+  width: 100%;
+}
+
+.errorMessage {
+  color: #ca0015;
+}
+
+.buttonWrapper {
+  display: flex;
+  justify-content: center;
+  margin: 64px 0 0;
+}
+
+.button {
+  background: #000;
+  border-radius: 8px;
+  color: #fff;
+  letter-spacing: 0.25rem;
+  padding: 12px 32px;
+  transition: 250ms;
+}
+
+.button:disabled {
+  opacity: 0.5;
+}
+
 .scrollToTop {
   background: #018ccd !important;
   border-radius: 0 !important;
