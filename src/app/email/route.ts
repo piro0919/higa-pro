@@ -21,10 +21,12 @@ export async function POST(
         pass: process.env.NODEMAILER_AUTH_PASS,
         user: process.env.NODEMAILER_AUTH_USER,
       },
+      host: "smtp.gmail.com",
       port: 465,
       secure: true,
-      service: "gmail",
     });
+
+    await transporter.verify();
 
     await transporter.sendMail({
       replyTo: email,
