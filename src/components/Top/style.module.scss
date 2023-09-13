@@ -122,6 +122,49 @@
   }
 }
 
+.talentsWrapper {
+  display: grid;
+  @include mq.mq($until: tablet) {
+    gap: 12px;
+    grid-template: auto / repeat(2, 1fr);
+    margin: 24px 0 0;
+  }
+  @include mq.mq($from: tablet, $until: wide) {
+    gap: 24px;
+    grid-template: auto / repeat(3, 1fr);
+    margin: 64px 0 0;
+  }
+  @include mq.mq($from: wide) {
+    gap: 24px;
+    grid-template: auto / repeat(4, 1fr);
+    margin: 64px 0 0;
+  }
+}
+
+.talentWrapper {
+  display: grid;
+  gap: 12px;
+}
+
+.talentImageWrapper {
+  aspect-ratio: 1 / 1;
+  /* stylelint-disable-next-line csstree/validator */
+  background: rgba(#fff, 0.25);
+  overflow: hidden;
+  position: relative;
+  @include mq.mq($until: tablet) {
+    border-radius: 12px;
+  }
+  @include mq.mq($from: tablet) {
+    border-radius: 24px;
+  }
+}
+
+.name {
+  font-size: 2rem;
+  text-align: center;
+}
+
 .swiperWrapper {
   position: relative;
   @include mq.mq($until: tablet) {

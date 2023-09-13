@@ -127,6 +127,42 @@ export default function Top({ onSubmit }: TopProps): JSX.Element {
                     TALENT
                   </h2>
                 </div>
+                <div className={styles.talentsWrapper}>
+                  {[
+                    {
+                      name: "碧海",
+                      url: "S__70942761.png",
+                    },
+                    {
+                      name: "柘榴猫",
+                      url: "S__70942765.png",
+                    },
+                    {
+                      name: "睦月みこと",
+                      url: "S__70942771.png",
+                    },
+                    {
+                      name: "紅猫幸村",
+                      url: "S__70942773.png",
+                    },
+                  ].map(({ name, url }) => (
+                    <div className={styles.talentWrapper} key={url}>
+                      <div className={styles.talentImageWrapper}>
+                        <Image
+                          alt="HIGApro"
+                          fill={true}
+                          quality={100}
+                          src={url}
+                          style={{
+                            objectFit: "cover",
+                            objectPosition: "top center",
+                          }}
+                        />
+                      </div>
+                      <div className={styles.name}>{name}</div>
+                    </div>
+                  ))}
+                </div>
                 <div
                   className={styles.swiperWrapper}
                   style={{ height: talentImageWidth * 3 }}
@@ -161,6 +197,7 @@ export default function Top({ onSubmit }: TopProps): JSX.Element {
                                   <Image
                                     alt="HIGApro"
                                     fill={true}
+                                    quality={100}
                                     src={src}
                                     style={{ objectFit: "cover" }}
                                   />

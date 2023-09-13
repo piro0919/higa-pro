@@ -1,4 +1,3 @@
-// eslint-disable-next-line filenames/match-regex
 "use client";
 import axios from "axios";
 import { useCallback } from "react";
