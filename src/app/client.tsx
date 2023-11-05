@@ -4,7 +4,9 @@ import { useCallback } from "react";
 import { toast } from "react-toastify";
 import Top, { TopProps } from "@/components/Top";
 
-export default function Client(): JSX.Element {
+export type ClientProps = Pick<TopProps, "talents">;
+
+export default function Client({ talents }: ClientProps): JSX.Element {
   const handleSubmit = useCallback<TopProps["onSubmit"]>(async (values) => {
     try {
       await toast.promise(axios.post("/email", values), {
@@ -17,5 +19,5 @@ export default function Client(): JSX.Element {
     }
   }, []);
 
-  return <Top onSubmit={handleSubmit} />;
+  return <Top onSubmit={handleSubmit} talents={talents} />;
 }

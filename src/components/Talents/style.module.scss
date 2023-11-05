@@ -1,0 +1,121 @@
+.articleInner {
+  color: #fff;
+  margin-inline: auto;
+  /* stylelint-disable-next-line csstree/validator */
+  width: min(100%, 1240px);
+}
+
+.heading2Wrapper {
+  position: relative;
+}
+
+.heading2Wrapper::before {
+  /* stylelint-disable-next-line csstree/validator */
+  background: rgba(#fff, 0.25);
+  border-radius: 0 100dvmax 100dvmax 0;
+  content: "";
+  display: block;
+  inset: 40% 0 0 -50dvw;
+  position: absolute;
+}
+
+.heading2 {
+  background-color: #fff001;
+  background-repeat: repeat;
+  /* stylelint-disable-next-line csstree/validator */
+  color: #e5780a;
+  position: relative;
+  /* stylelint-disable-next-line csstree/validator */
+  text-shadow: 8px 8px 0 rgba(#fff, 0.25);
+  @include mq.mq($until: tablet) {
+    font-size: 6.4rem;
+  }
+  @include mq.mq($from: tablet) {
+    font-size: 8rem;
+  }
+}
+
+.articleContent {
+  align-items: center;
+  display: flex;
+  font-size: 1.8rem;
+  justify-content: center;
+  min-height: 320px;
+}
+
+.articleText {
+  background: #000;
+  letter-spacing: 0.25rem;
+  line-height: 2;
+  text-align: center;
+  @include mq.mq($until: tablet) {
+    padding: 12px 32px;
+  }
+  @include mq.mq($from: tablet) {
+    padding: 24px 64px;
+  }
+}
+
+.talentsWrapper {
+  display: grid;
+  @include mq.mq($until: tablet) {
+    gap: 12px;
+    grid-template: auto / repeat(2, 1fr);
+    margin: 24px 0 0;
+  }
+  @include mq.mq($from: tablet, $until: wide) {
+    gap: 24px;
+    grid-template: auto / repeat(3, 1fr);
+    margin: 64px 0 0;
+  }
+  @include mq.mq($from: wide) {
+    gap: 24px;
+    grid-template: auto / repeat(4, 1fr);
+    margin: 64px 0 0;
+  }
+}
+
+.talentWrapper {
+  display: grid;
+  gap: 12px;
+}
+
+.talentImageWrapper {
+  aspect-ratio: 1 / 1;
+  /* stylelint-disable-next-line csstree/validator */
+  background: rgba(#fff, 0.25);
+  overflow: hidden;
+  position: relative;
+  @include mq.mq($until: tablet) {
+    border-radius: 12px;
+  }
+  @include mq.mq($from: tablet) {
+    border-radius: 24px;
+  }
+}
+
+.name {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.swiperWrapper {
+  position: relative;
+  @include mq.mq($until: tablet) {
+    margin: 24px 0 0;
+  }
+  @include mq.mq($from: tablet) {
+    margin: 64px 0 0;
+  }
+}
+
+.swiper {
+  position: absolute;
+  width: 100%;
+}
+
+.swiperWrapper .articleContent {
+  inset: 0;
+  position: absolute;
+  z-index: 2;
+}

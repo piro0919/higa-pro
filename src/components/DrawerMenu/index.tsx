@@ -1,4 +1,3 @@
-"use client";
 import NoSSR from "@mpth/react-no-ssr";
 import { Archivo } from "next/font/google";
 import { ComponentProps } from "react";

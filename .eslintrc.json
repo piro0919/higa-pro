@@ -61,7 +61,10 @@
       {
         "blankLine": "always",
         "next": [
+          "block",
+          "block-like",
           "break",
+          "class",
           "const",
           "do",
           "export",
@@ -78,6 +81,10 @@
         "blankLine": "always",
         "next": "*",
         "prev": [
+          "block",
+          "block-like",
+          "break",
+          "class",
           "const",
           "do",
           "export",
@@ -96,7 +103,7 @@
       },
       {
         "blankLine": "never",
-        "next": "case",
+        "next": ["case", "default"],
         "prev": "case"
       },
       {

@@ -12,8 +12,7 @@ export type PostEmailData = Record<string, never>;
 export async function POST(
   request: NextRequest
 ): Promise<NextResponse<PostEmailData>> {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const { content, email, name }: PostEmailBody = await request.json();
+  const { content, email, name } = (await request.json()) as PostEmailBody;
 
   try {
     const transporter = nodemailer.createTransport({

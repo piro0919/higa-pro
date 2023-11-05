@@ -1,21 +1,3 @@
-.wrapper {
-  display: grid;
-  position: relative;
-  @include mq.mq($until: tablet) {
-    margin: 48px 0 0;
-  }
-  @include mq.mq($from: tablet) {
-    margin: 64px 0 0;
-  }
-}
-
-.headerWrapper {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 3;
-}
-
 .top {
   align-items: center;
   background: #ca0015;
@@ -122,70 +104,6 @@
   }
 }
 
-.talentsWrapper {
-  display: grid;
-  @include mq.mq($until: tablet) {
-    gap: 12px;
-    grid-template: auto / repeat(2, 1fr);
-    margin: 24px 0 0;
-  }
-  @include mq.mq($from: tablet, $until: wide) {
-    gap: 24px;
-    grid-template: auto / repeat(3, 1fr);
-    margin: 64px 0 0;
-  }
-  @include mq.mq($from: wide) {
-    gap: 24px;
-    grid-template: auto / repeat(4, 1fr);
-    margin: 64px 0 0;
-  }
-}
-
-.talentWrapper {
-  display: grid;
-  gap: 12px;
-}
-
-.talentImageWrapper {
-  aspect-ratio: 1 / 1;
-  /* stylelint-disable-next-line csstree/validator */
-  background: rgba(#fff, 0.25);
-  overflow: hidden;
-  position: relative;
-  @include mq.mq($until: tablet) {
-    border-radius: 12px;
-  }
-  @include mq.mq($from: tablet) {
-    border-radius: 24px;
-  }
-}
-
-.name {
-  font-size: 2rem;
-  text-align: center;
-}
-
-.swiperWrapper {
-  position: relative;
-  @include mq.mq($until: tablet) {
-    margin: 24px 0 0;
-  }
-  @include mq.mq($from: tablet) {
-    margin: 64px 0 0;
-  }
-}
-
-.swiper {
-  position: absolute;
-  width: 100%;
-}
-
-.swiperWrapper .articleContent {
-  inset: 0;
-  position: absolute;
-  z-index: 2;
-}
-
 .formWrapper {
   margin: 48px 0;
   @include mq.mq($until: tablet) {
@@ -236,24 +154,4 @@
 
 .button:disabled {
   opacity: 0.5;
-}
-
-.scrollToTop {
-  background: #018ccd !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-  color: #fff;
-  font-size: 2rem;
-  right: 0 !important;
-  width: auto !important;
-  @include mq.mq($until: tablet) {
-    padding: 0 12px;
-  }
-  @include mq.mq($from: tablet) {
-    padding: 0 64px 0 12px;
-  }
-}
-
-.scrollToTop:active {
-  transform: none !important;
 }

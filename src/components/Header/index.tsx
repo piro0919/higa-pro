@@ -1,5 +1,6 @@
 import { CommonBurgerProps, Sling as Hamburger } from "hamburger-react";
 import { Saira_Stencil_One as SairaStencilOne } from "next/font/google";
+import Link from "next/link";
 import { scroller } from "react-scroll";
 import Spacer from "react-spacer";
 import { useElementSize } from "usehooks-ts";
@@ -16,32 +17,34 @@ export default function Header({
   toggle,
   toggled,
 }: HeaderProps): JSX.Element {
-  const [ref, { height }] = useElementSize();
+  const [ref, { height: headerHeight }] = useElementSize();
 
   return (
     <header
       className={`${styles.header} ${sairaStencilOne.className}`}
       ref={ref}
     >
-      <a
+      <Link
         className={styles.title}
+        href="/"
         onClick={(): void => {
           onClose();
 
           scroller.scrollTo("top", {
             duration: 500,
-            offset: height * -1,
+            offset: headerHeight * -1,
             smooth: true,
           });
         }}
       >
         HIGApro
-      </a>
+      </Link>
       <Spacer grow="1" />
       <nav className={styles.nav}>
         <ul className={styles.list}>
           <li>
-            <a
+            <Link
+              href="/#about"
               onClick={(): void => {
                 scroller.scrollTo("about", {
                   duration: 500,
@@ -51,10 +54,11 @@ export default function Header({
               }}
             >
               ABOUT
-            </a>
+            </Link>
           </li>
           <li>
-            <a
+            <Link
+              href="/#talent"
               onClick={(): void => {
                 scroller.scrollTo("talent", {
                   duration: 500,
@@ -64,10 +68,11 @@ export default function Header({
               }}
             >
               TALENT
-            </a>
+            </Link>
           </li>
           <li>
-            <a
+            <Link
+              href="/#contact"
               onClick={(): void => {
                 scroller.scrollTo("contact", {
                   duration: 500,
@@ -77,7 +82,7 @@ export default function Header({
               }}
             >
               CONTACT
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>
