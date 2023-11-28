@@ -20,7 +20,8 @@ async function getTalents(): Promise<GetTalentsData> {
 export default async function Page(): Promise<JSX.Element> {
   const { contents } = await getTalents();
   const talents: ClientProps["talents"] = contents.map(
-    ({ id, images: [{ url }], name }) => ({
+    ({ furigana, id, images: [{ url }], name }) => ({
+      furigana,
       id,
       image: url,
       name,

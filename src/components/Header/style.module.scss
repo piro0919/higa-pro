@@ -1,48 +1,21 @@
 .header {
-  align-items: center;
-  background: #000;
-  color: #fff;
+  background-color: #6777ff;
+  background-repeat: repeat;
+  /* stylelint-disable-next-line csstree/validator */
+  border-bottom: 1px solid rgba(#fff, 0.5);
+  /* stylelint-disable-next-line csstree/validator */
+  color: rgba(#fff, 0.25);
   display: flex;
-  width: 100%;
-  @include mq.mq($until: tablet) {
-    height: 48px;
-    padding: 0 12px;
-  }
-  @include mq.mq($from: tablet) {
-    height: 64px;
-    padding: 0 64px;
-  }
-}
-
-.title {
-  font-size: 3.2rem;
-}
-
-.nav {
-  font-size: 2rem;
-  @include mq.mq($until: tablet) {
-    display: none;
-  }
-  @include mq.mq($from: tablet) {
-    display: block;
-  }
 }
 
 .list {
+  color: #fff;
   display: flex;
-  @include mq.mq($until: tablet) {
-    gap: 12px;
-  }
-  @include mq.mq($from: tablet) {
-    gap: 32px;
-  }
+  gap: 36px;
+  margin: 8px 0;
 }
 
-.hamburgerWrapper {
-  @include mq.mq($until: tablet) {
-    display: block;
-  }
-  @include mq.mq($from: tablet) {
-    display: none;
-  }
+.link {
+  font-size: 1.6rem;
+  font-weight: 900;
 }

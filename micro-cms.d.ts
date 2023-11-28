@@ -6,6 +6,7 @@ declare namespace MicroCMS {
   };
 
   type Talent = {
+    furigana: string;
     images: Image[];
     name: string;
   };

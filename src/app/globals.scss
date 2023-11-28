@@ -8,7 +8,8 @@ html {
 }
 
 body {
-  background: #ca0015;
+  font-family: arial, sans-serif;
+  letter-spacing: 0.5px;
   overflow-x: hidden;
 }
 
@@ -24,21 +25,16 @@ a {
 
 img,
 svg {
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-style: italic;
+  height: auto;
+  max-width: 100%;
   pointer-events: none;
-}
-
-textarea {
-  resize: none;
+  shape-margin: 1rem;
+  vertical-align: middle;
 }
 
 ul {
   list-style: none;
-}
-
-.swiper-wrapper {
-  transition-timing-function: linear !important;
-}
-
-.Toastify__toast-body {
-  font-size: 1.6rem;
 }
