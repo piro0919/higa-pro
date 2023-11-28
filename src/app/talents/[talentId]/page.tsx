@@ -21,6 +21,9 @@ export async function generateStaticParams(): Promise<StaticParams> {
       },
     },
     endpoint: "talents",
+    queries: {
+      limit: 100,
+    },
   });
 
   return contents.map(({ id }) => ({
@@ -58,6 +61,9 @@ async function getTalents(): Promise<GetTalentsData> {
       },
     },
     endpoint: "talents",
+    queries: {
+      limit: 100,
+    },
   });
 
   return response;
@@ -71,7 +77,9 @@ type PageProps = {
 export default async function Page({
   params: { talentId },
 }: PageProps): Promise<JSX.Element> {
-  const { images, name } = await getTalent({ contentId: talentId });
+  const { images, iriamUrl, name, profile, twitterUrl } = await getTalent({
+    contentId: talentId,
+  });
   const image: TalentProps["image"] = images[0];
   const { contents } = await getTalents();
   const talents: TalentProps["talents"] = contents
@@ -82,5 +90,14 @@ export default async function Page({
       name,
     }));
 
-  return <Talent image={image} name={name} talents={talents} />;
+  return (
+    <Talent
+      image={image}
+      iriamUrl={iriamUrl}
+      name={name}
+      profile={profile}
+      talents={talents}
+      twitterUrl={twitterUrl}
+    />
+  );
 }

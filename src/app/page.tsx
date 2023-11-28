@@ -12,6 +12,9 @@ async function getTalents(): Promise<GetTalentsData> {
       },
     },
     endpoint: "talents",
+    queries: {
+      limit: 100,
+    },
   });
 
   return response;

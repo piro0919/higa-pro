@@ -7,6 +7,9 @@ declare namespace MicroCMS {
 
   type Talent = {
     images: Image[];
+    iriamUrl: string;
     name: string;
+    profile: string;
+    twitterUrl: string;
   };
 }

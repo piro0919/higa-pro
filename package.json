@@ -32,6 +32,7 @@
     "eslint-plugin-typescript-sort-keys": "2.3.0",
     "eslint-plugin-unused-imports": "2.0.0",
     "hamburger-react": "2.5.0",
+    "html-react-parser": "5.0.6",
     "husky": "8.0.3",
     "lint-staged": "13.2.2",
     "microcms-js-sdk": "2.6.1",
