@@ -1,0 +1,17 @@
+.drawer {
+  height: auto !important;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  padding: 48px 0;
+  text-align: center;
+}
+
+.link {
+  color: #6777ff;
+  font-size: 1.6rem;
+  font-weight: 900;
+}

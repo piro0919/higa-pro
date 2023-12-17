@@ -1,21 +1,25 @@
 .header {
-  background-color: #6777ff;
-  background-repeat: repeat;
+  backdrop-filter: blur(1px);
   /* stylelint-disable-next-line csstree/validator */
-  border-bottom: 1px solid rgba(#fff, 0.5);
+  background-color: rgba(#6777ff, 0.95);
+  background-repeat: repeat;
+  border: 2px solid #fff;
+  border-radius: 50dvmax;
   /* stylelint-disable-next-line csstree/validator */
   color: rgba(#fff, 0.25);
   display: flex;
+  max-width: 1280px;
+  width: 100%;
 }
 
 .list {
-  color: #fff;
   display: flex;
   gap: 36px;
   margin: 8px 0;
 }
 
 .link {
+  color: #fff;
   font-size: 1.6rem;
   font-weight: 900;
 }

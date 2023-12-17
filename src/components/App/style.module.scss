@@ -1,3 +1,7 @@
+.wrapper {
+  min-height: inherit;
+}
+
 .topBlock {
   align-items: center;
   background-color: #6777ff;
@@ -5,8 +9,69 @@
   /* stylelint-disable-next-line csstree/validator */
   color: rgba(#fff, 0.25);
   display: flex;
-  height: 90dvh;
+  height: 95dvh;
   justify-content: center;
+  position: relative;
+}
+
+.particles {
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.topTalentsWrapper {
+  display: grid;
+  grid-template: 100% / repeat(5, 20%);
+  /* stylelint-disable-next-line csstree/validator */
+  height: min(calc(100% - 24px * 2), 100dvw);
+  max-height: 960px;
+  max-width: 1280px;
+  position: absolute;
+  width: 100%;
+}
+
+.topTalentImageWrapper {
+  display: flex;
+  grid-row: 1 / 2;
+  justify-content: center;
+}
+
+.topTalentImageWrapper[data-rank="1"] {
+  grid-column: 3 / 4;
+}
+
+.topTalentImageWrapper[data-rank="2"] {
+  grid-column: 2 / 3;
+}
+
+.topTalentImageWrapper[data-rank="3"] {
+  grid-column: 4 / 5;
+}
+
+.topTalentImageWrapper[data-rank="4"] {
+  grid-column: 1 / 2;
+}
+
+.topTalentImageWrapper[data-rank="5"] {
+  grid-column: 5 / 6;
+}
+
+.topTalentImageBlock {
+  height: 100%;
+  position: relative;
+}
+
+.topTalentImage {
+  position: absolute;
+  @include mq.mq($until: desktop) {
+    filter: drop-shadow(4px 4px rgba(#063f5c, 0.75));
+  }
+  @include mq.mq($from: desktop) {
+    filter: drop-shadow(8px 8px rgba(#063f5c, 0.75));
+  }
 }
 
 .heading1 {
@@ -18,15 +83,15 @@
 
 .logoBlock {
   /* stylelint-disable-next-line csstree/validator */
-  height: min(640px, 80dvmin);
+  height: min(480px, 80dvmin);
   position: relative;
   /* stylelint-disable-next-line csstree/validator */
-  width: min(640px, 80dvmin);
+  width: min(480px, 80dvmin);
 }
 
-.logoBlock img {
-  filter: drop-shadow(0 0 5px rgba(#fff, 0.5))
-    drop-shadow(0 0 15px rgba(#fff, 0.25));
+.logoImage {
+  filter: drop-shadow(0 0 5px #666) drop-shadow(0 0 15px rgba(#fff, 0.5))
+    drop-shadow(0 0 25px #6777ff) drop-shadow(0 0 35px rgba(#6777ff, 0.25));
 }
 
 .aboutArticle {
@@ -34,30 +99,41 @@
 }
 
 .aboutArticle,
+.newsArticle,
 .talentArticle,
 .contactArticle {
   background-repeat: repeat;
   /* stylelint-disable-next-line csstree/validator */
   color: rgba(#fff, 0.25);
-  @include mq.mq($until: tablet) {
+  display: flex;
+  position: relative;
+  @include mq.mq($until: desktop) {
     padding: 180px 12px 120px;
   }
-  @include mq.mq($from: tablet) {
+  @include mq.mq($from: desktop) {
     padding: 180px 72px 120px;
   }
 }
 
-.aboutInner {
+.aboutInner,
+.newsInner,
+.talentInner,
+.contactInner {
   backdrop-filter: blur(1px);
-  /* stylelint-disable-next-line csstree/validator */
-  background: rgba(#ffcdcd, 0.75);
   border: 4px dashed #fff;
   border-radius: 0 24px;
+  max-width: 1280px;
   position: relative;
-  @include mq.mq($until: tablet) {
+  width: 100%;
+}
+
+.aboutInner {
+  /* stylelint-disable-next-line csstree/validator */
+  background: rgba(#ffcdcd, 0.75);
+  @include mq.mq($until: desktop) {
     padding: 96px 12px;
   }
-  @include mq.mq($from: tablet) {
+  @include mq.mq($from: desktop) {
     padding: 96px 48px;
   }
 }
@@ -65,10 +141,10 @@
 .heading2Block {
   left: 0;
   position: absolute;
-  @include mq.mq($until: tablet) {
+  @include mq.mq($until: desktop) {
     bottom: calc(100% - 12px);
   }
-  @include mq.mq($from: tablet) {
+  @include mq.mq($from: desktop) {
     bottom: calc(100% - 26px);
   }
 }
@@ -77,10 +153,10 @@
   color: #fff;
   filter: drop-shadow(8px 0 rgba(#063f5c, 0.75));
   letter-spacing: 2px;
-  @include mq.mq($until: tablet) {
+  @include mq.mq($until: desktop) {
     font-size: 7.2rem;
   }
-  @include mq.mq($from: tablet) {
+  @include mq.mq($from: desktop) {
     font-size: 12rem;
   }
 }
@@ -93,54 +169,110 @@
   text-align: center;
 }
 
+.newsArticle {
+  background-color: #fed200;
+}
+
+.newsInner {
+  /* stylelint-disable-next-line csstree/validator */
+  background: rgba(#f7ff99, 0.75);
+  @include mq.mq($until: tablet) {
+    padding: 96px 12px;
+  }
+  @include mq.mq($from: tablet) {
+    padding: 96px 48px;
+  }
+}
+
+.newsList {
+  color: #063f5c;
+  font-size: 2rem;
+  font-weight: 900;
+  line-height: 2;
+  text-align: center;
+}
+
 .talentArticle {
   background-color: #57e650;
-  /* stylelint-disable-next-line csstree/validator */
-  color: rgba(#fff, 0.25);
 }
 
 .talentInner {
-  backdrop-filter: blur(1px);
   /* stylelint-disable-next-line csstree/validator */
   background: rgba(#baffc0, 0.75);
-  border: 4px dashed #fff;
-  border-radius: 0 24px;
+}
+
+.talentWrapper {
   display: grid;
-  position: relative;
+  @include mq.mq($until: tablet) {
+    gap: 12px;
+    padding: 12px 12px 48px;
+  }
+  @include mq.mq($from: tablet, $until: desktop) {
+    gap: 24px;
+    padding: 24px 12px 48px;
+  }
+  @include mq.mq($from: desktop) {
+    gap: 36px;
+    padding: 36px 48px 48px;
+  }
+}
+
+.debutsWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.debutBlock {
+  /* stylelint-disable-next-line csstree/validator */
+  background: rgba(#000, 0.125);
+  border: 1px solid #fff;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: 900;
+  padding: 4px 12px;
+  @include mq.mq($until: desktop) {
+    font-size: 1.6rem;
+  }
+  @include mq.mq($from: desktop) {
+    font-size: 1.8rem;
+  }
+}
+
+.currentDebutBlock {
+  background: #fff;
+  color: #96db99;
 }
 
 .talentsWrapper {
   display: grid;
-  gap: 24px;
-  padding: 48px;
   @include mq.mq($until: tablet) {
+    gap: 24px 12px;
     grid-template: auto / repeat(2, 1fr);
   }
   @include mq.mq($from: tablet, $until: desktop) {
+    gap: 24px 12px;
     grid-template: auto / repeat(3, 1fr);
   }
-  @include mq.mq($from: desktop, $until: wide) {
+  @include mq.mq($from: desktop) {
+    gap: 60px 24px;
     grid-template: auto / repeat(4, 1fr);
-  }
-  @include mq.mq($from: wide) {
-    grid-template: auto / repeat(5, 1fr);
   }
 }
 
 .talentBlock {
-  background-color: #6777ff;
+  aspect-ratio: 9 / 16;
+  /* stylelint-disable-next-line csstree/validator */
+  background-color: rgba(#000, 0.125);
   background-repeat: repeat;
   border-radius: 12px;
-  padding: 12px;
-}
-
-.talentImageWrapper {
-  aspect-ratio: 9 / 16;
+  color: #fff;
   position: relative;
 }
 
-.talentImageWrapper img {
-  filter: drop-shadow(8px 8px rgba(#063f5c, 0.75));
+.talentNameBlock {
+  left: 0;
+  top: 0;
 }
 
 .talentFuriganaBlock {
@@ -151,11 +283,56 @@
 .talentNameBlock,
 .talentFuriganaBlock {
   color: #fff;
-  filter: drop-shadow(8px 8px rgba(#063f5c, 0.75));
-  font-size: 3.6rem;
+  filter: drop-shadow(4px 4px rgba(#063f5c, 0.5));
+  font-size: 2.4rem;
   font-weight: 900;
+  padding: 8px;
   position: absolute;
   writing-mode: vertical-rl;
+}
+
+.talentImageWrapper {
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
+
+.talentImageFigure {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  @include mq.mq($until: desktop) {
+    height: 108%;
+    top: -4%;
+  }
+  @include mq.mq($from: desktop) {
+    height: 112%;
+    top: -6%;
+  }
+}
+
+.talentImage,
+.noDataImage {
+  @include mq.mq($until: desktop) {
+    filter: drop-shadow(4px 4px rgba(#063f5c, 0.75));
+    height: 94% !important;
+  }
+  @include mq.mq($from: desktop) {
+    filter: drop-shadow(8px 8px rgba(#063f5c, 0.75));
+    height: 96% !important;
+  }
+  left: 50% !important;
+  top: 50% !important;
+  transform: translate(-50%, -50%);
+  width: auto !important;
+}
+
+.talentImage {
+  object-fit: cover;
+}
+
+.noDataImage {
+  object-fit: contain;
 }
 
 .contactArticle {
@@ -163,16 +340,12 @@
 }
 
 .contactInner {
-  backdrop-filter: blur(1px);
   /* stylelint-disable-next-line csstree/validator */
   background: rgba(#ffa1f7, 0.75);
-  border: 4px dashed #fff;
-  border-radius: 0 24px;
-  position: relative;
-  @include mq.mq($until: tablet) {
+  @include mq.mq($until: desktop) {
     padding: 96px 12px;
   }
-  @include mq.mq($from: tablet) {
+  @include mq.mq($from: desktop) {
     padding: 96px 48px;
   }
 }

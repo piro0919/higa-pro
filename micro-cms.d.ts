@@ -6,8 +6,18 @@ declare namespace MicroCMS {
   };
 
   type Talent = {
+    debut: string;
     furigana: string;
-    images: Image[];
+    images?: Image[];
+    iriamUrl: string;
     name: string;
+    profile: string;
+    rank?: 1 | 2 | 3 | 4 | 5;
+    twitterUrl: string;
+  };
+
+  type News = {
+    content: string;
+    title: string;
   };
 }

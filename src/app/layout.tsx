@@ -1,6 +1,7 @@
 // eslint-disable-next-line filenames/match-exported
 import "pattern.css";
 import { ReactNode } from "react";
+import "react-modern-drawer/dist/index.css";
 import "ress";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
