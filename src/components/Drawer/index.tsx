@@ -24,33 +24,33 @@ export default function Drawer({ onClose, open }: DrawerProps): JSX.Element {
         <ul className={styles.list}>
           <li>
             <Link className={`${styles.link} ${jost.className}`} href="/">
-              TOP
+              <span onClick={onClose}>TOP</span>
             </Link>
           </li>
           <li>
-            <Link className={`${styles.link} ${jost.className}`} href="/about">
-              ABOUT
+            <Link className={`${styles.link} ${jost.className}`} href="/#about">
+              <span onClick={onClose}>ABOUT</span>
             </Link>
           </li>
           <li>
-            <Link className={`${styles.link} ${jost.className}`} href="/news">
-              NEWS
-            </Link>
-          </li>
-          <li>
-            <Link
-              className={`${styles.link} ${jost.className}`}
-              href="/talents"
-            >
-              TALENT
+            <Link className={`${styles.link} ${jost.className}`} href="/#news">
+              <span onClick={onClose}>NEWS</span>
             </Link>
           </li>
           <li>
             <Link
               className={`${styles.link} ${jost.className}`}
-              href="/contact"
+              href="/#talents"
             >
-              CONTACT
+              <span onClick={onClose}>TALENT</span>
+            </Link>
+          </li>
+          <li>
+            <Link
+              className={`${styles.link} ${jost.className}`}
+              href="/#contact"
+            >
+              <span onClick={onClose}>CONTACT</span>
             </Link>
           </li>
         </ul>

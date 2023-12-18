@@ -3,16 +3,18 @@ import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
 import capitalize from "capitalize";
 import dayjs from "dayjs";
+import { motion } from "framer-motion";
 import parse from "html-react-parser";
-import { Zen_Kaku_Gothic_New as ZenKakuGothicNew } from "next/font/google";
+import { Jost, Rampart_One as RampartOne } from "next/font/google";
 import Image from "next/image";
 import useAsyncEffect from "use-async-effect";
 import { useBoolean } from "usehooks-ts";
 import styles from "./style.module.scss";
 
-const zenKakuGothicNew = ZenKakuGothicNew({
+const jost = Jost({ subsets: ["latin"], weight: "700" });
+const rampartOne = RampartOne({
   subsets: ["latin"],
-  weight: "700",
+  weight: "400",
 });
 
 export type TalentProps = {
@@ -34,12 +36,13 @@ export default function Talent({
   debut,
   furigana,
   image,
-  // iriamUrl,
+  iriamUrl,
   name,
   profile,
-}: // twitterUrl,
-TalentProps): JSX.Element {
+  twitterUrl,
+}: TalentProps): JSX.Element {
   const { setTrue: onInit, value: init } = useBoolean(false);
+  const { setTrue: onLoaded, value: loaded } = useBoolean(false);
 
   useAsyncEffect(async () => {
     await initParticlesEngine(async (engine) => {
@@ -116,22 +119,34 @@ TalentProps): JSX.Element {
         />
       ) : null}
       <div className={styles.talentWrapper}>
-        <div className={styles.talentImageWrapper}>
+        <motion.div
+          animate={{ scale: loaded ? 1 : 0 }}
+          className={styles.talentImageWrapper}
+          initial={{ scale: 0 }}
+          transition={{
+            duration: 0.5,
+            ease: "backOut",
+          }}
+        >
           {image ? (
             <Image
               alt={name}
               className={styles.talentImage}
               fill={true}
+              onLoad={onLoaded}
               quality={100}
               src={image.url}
             />
           ) : null}
-        </div>
+        </motion.div>
         <div className={styles.nameWrapper}>
-          <div className={styles.nameInner}>
-            <div
-              className={`${styles.nameBlock} ${zenKakuGothicNew.className}`}
-            >
+          <motion.div
+            animate={{ scale: loaded ? 1 : 0 }}
+            className={styles.nameInner}
+            initial={{ scale: 0 }}
+            transition={{ delay: 0.1, duration: 0.5, ease: "backOut" }}
+          >
+            <div className={`${styles.nameBlock} ${rampartOne.className}`}>
               {name}
             </div>
             <div className={styles.furiganaBlock}>
@@ -140,20 +155,39 @@ TalentProps): JSX.Element {
                 .map((v) => capitalize(v))
                 .join(" ")}
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
       <div className={styles.detailWrapper}>
         <div className={styles.detailInner}>
           <div className={styles.profileBlock}>{parse(profile)}</div>
+          <hr className={styles.hr} />
           <div>
             <dl className={styles.detailList}>
-              <dt className={styles.detailTerm}>デビュー</dt>
+              <dt className={styles.detailTerm}>デビュー日</dt>
               <dd>{dayjs(debut).format("YYYY年M月D日")}</dd>
             </dl>
             <div className={styles.buttonsWrapper}>
-              <button className={styles.button}>IRIAM</button>
-              <button className={styles.button}>X（旧Twitter）</button>
+              <button
+                className={`${styles.button} pattern-cross-dots-lg`}
+                onClick={(): void => {
+                  window.open(iriamUrl, "_blank");
+                }}
+              >
+                <span className={`${styles.buttonText} ${jost.className}`}>
+                  IRIAM
+                </span>
+              </button>
+              <button
+                className={`${styles.button} pattern-cross-dots-lg`}
+                onClick={(): void => {
+                  window.open(twitterUrl, "_blank");
+                }}
+              >
+                <span className={`${styles.buttonText} ${jost.className}`}>
+                  X
+                </span>
+              </button>
             </div>
           </div>
         </div>

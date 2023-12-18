@@ -52,7 +52,8 @@ export default async function Page(): Promise<JSX.Element> {
   );
   const { contents: newsListContents } = await getNewsList();
   const newsList: ClientProps["newsList"] = newsListContents.map(
-    ({ createdAt, id, publishedAt, title }) => ({
+    ({ content, createdAt, id, publishedAt, title }) => ({
+      content,
       id,
       publishedAt: typeof publishedAt === "string" ? publishedAt : createdAt,
       title,

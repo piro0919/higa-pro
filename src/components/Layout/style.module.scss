@@ -54,3 +54,16 @@
     display: none;
   }
 }
+
+.hamburgerMenuInner {
+  backdrop-filter: blur(1px);
+  /* stylelint-disable-next-line csstree/validator */
+  background-color: rgba(#6777ff, 0.95);
+  background-repeat: repeat;
+  border: 2px solid #fff;
+  border-radius: 50dvmax;
+  /* stylelint-disable-next-line csstree/validator */
+  color: rgba(#fff, 0.25);
+  cursor: pointer;
+  padding: 12px;
+}

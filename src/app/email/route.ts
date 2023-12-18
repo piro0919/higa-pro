@@ -29,7 +29,7 @@ export async function POST(
 
     await transporter.sendMail({
       replyTo: email,
-      subject: `[HIGApro]${name}様から新しいメッセージ`,
+      subject: `[Higa Production]${name}様から新しいメッセージ`,
       text: content,
       to: process.env.NODEMAILER_AUTH_USER,
     });

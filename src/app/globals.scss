@@ -38,3 +38,8 @@ svg {
 ul {
   list-style: none;
 }
+
+.ReactModal__Overlay {
+  backdrop-filter: blur(1px);
+  z-index: 101;
+}

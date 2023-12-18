@@ -17,19 +17,19 @@ export default function Header(): JSX.Element {
             </Link>
           </li>
           <li>
-            <Link className={`${styles.link} ${jost.className}`} href="/about">
+            <Link className={`${styles.link} ${jost.className}`} href="/#about">
               ABOUT
             </Link>
           </li>
           <li>
-            <Link className={`${styles.link} ${jost.className}`} href="/news">
+            <Link className={`${styles.link} ${jost.className}`} href="/#news">
               NEWS
             </Link>
           </li>
           <li>
             <Link
               className={`${styles.link} ${jost.className}`}
-              href="/talents"
+              href="/#talents"
             >
               TALENT
             </Link>
@@ -37,7 +37,7 @@ export default function Header(): JSX.Element {
           <li>
             <Link
               className={`${styles.link} ${jost.className}`}
-              href="/contact"
+              href="/#contact"
             >
               CONTACT
             </Link>
