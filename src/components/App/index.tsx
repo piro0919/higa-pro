@@ -108,6 +108,7 @@ export default function App({
         {init ? (
           <Particles
             className={styles.particles}
+            key="particles"
             options={{
               detectRetina: true,
               fpsLimit: 60,
@@ -207,7 +208,13 @@ export default function App({
             ))}
         </div>
         <motion.div
-          animate={{ scale: count === 5 ? 1 : 0 }}
+          animate={{
+            scale:
+              count ===
+              talents.filter(({ rank }) => typeof rank === "number").length
+                ? 1
+                : 0,
+          }}
           className={styles.logoBlock}
           initial={{ scale: 0 }}
           transition={{
