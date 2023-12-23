@@ -1,6 +1,11 @@
 /* eslint-disable filenames/match-exported */
-import { MicroCMSContentId, MicroCMSDate } from "microcms-js-sdk";
-import Talent from "@/components/Talent";
+import {
+  MicroCMSContentId,
+  MicroCMSDate,
+  MicroCMSListResponse,
+} from "microcms-js-sdk";
+import { Metadata } from "next";
+import Talent, { TalentProps } from "@/components/Talent";
 import client from "@/libs/client";
 
 type StaticParam = {
@@ -60,18 +65,59 @@ async function getTalent({
   return response;
 }
 
+type GetTalentListData = MicroCMSListResponse<MicroCMS.Talent>;
+
+async function getTalentList(): Promise<GetTalentListData> {
+  const response = await client.getList<MicroCMS.Talent>({
+    customRequestInit: {
+      next: {
+        revalidate: process.env.VERCEL_ENV === "production" ? 60 * 60 : false,
+      },
+    },
+    endpoint: "talents",
+    queries: {
+      limit: 100,
+    },
+  });
+
+  return response;
+}
+
 type TalentNameProps = {
   params: {
     talentName: string;
   };
 };
 
-// export async function generateMetadata(
-//   { params: { talentName } }: TalentNameProps,
-//   parent: ResolvingMetadata
-// ): Promise<Metadata> {
-//   return {};
-// }
+export async function generateMetadata({
+  params: { talentName },
+}: TalentNameProps): Promise<Metadata> {
+  const [contentId] = await client.getAllContentIds({
+    customRequestInit: {
+      next: {
+        revalidate: process.env.VERCEL_ENV === "production" ? 60 * 60 : false,
+      },
+    },
+    endpoint: "talents",
+    filters: `furigana[equals]${talentName}`,
+  });
+  const { name, profile } = await client.get<
+    MicroCMS.Talent & MicroCMSContentId & MicroCMSDate
+  >({
+    contentId,
+    customRequestInit: {
+      next: {
+        revalidate: process.env.VERCEL_ENV === "production" ? 60 * 60 : false,
+      },
+    },
+    endpoint: "talents",
+  });
+
+  return {
+    description: profile,
+    title: name,
+  };
+}
 
 export default async function TalentName({
   params: { talentName },
@@ -80,6 +126,17 @@ export default async function TalentName({
     await getTalent({
       furigana: talentName,
     });
+  const { contents: talentListContents } = await getTalentList();
+  const talents: TalentProps["talents"] = talentListContents.map(
+    ({ debut, furigana, id, images, name, rank }) => ({
+      debut,
+      furigana,
+      id,
+      image: images?.at(0),
+      name,
+      rank,
+    })
+  );
 
   return (
     <Talent
@@ -90,6 +147,7 @@ export default async function TalentName({
       name={name}
       profile={profile}
       rank={rank}
+      talents={talents}
       twitterUrl={twitterUrl}
     />
   );

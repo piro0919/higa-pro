@@ -232,11 +232,17 @@ export default function App({
         >
           <Spacer grow={1} />
           <div className={styles.aboutInner}>
-            <div className={styles.heading2Block}>
+            <motion.div
+              className={styles.heading2Block}
+              initial={{ width: 0 }}
+              transition={{ delay: 0.25, duration: 0.5, ease: "circInOut" }}
+              viewport={{ once: true }}
+              whileInView={{ width: "100%" }}
+            >
               <h2 className={`${styles.heading2} ${raleway.className}`}>
                 ABOUT
               </h2>
-            </div>
+            </motion.div>
             <p className={styles.description}>
               Higa Production（ヒガプロダクション）は、
               <br />
@@ -250,11 +256,17 @@ export default function App({
         <article className={`${styles.newsArticle} pattern-checks-lg`}>
           <Spacer grow={1} />
           <div className={styles.newsInner}>
-            <div className={styles.heading2Block}>
+            <motion.div
+              className={styles.heading2Block}
+              initial={{ width: 0 }}
+              transition={{ delay: 0.25, duration: 0.5, ease: "circInOut" }}
+              viewport={{ once: true }}
+              whileInView={{ width: "100%" }}
+            >
               <h2 className={`${styles.heading2} ${raleway.className}`}>
                 NEWS
               </h2>
-            </div>
+            </motion.div>
             <ul className={styles.newsList}>
               {newsList.map(({ id, onOpen, publishedAt, title }) => (
                 <li key={id}>
@@ -272,11 +284,17 @@ export default function App({
         <article className={`${styles.talentArticle} pattern-zigzag-lg`}>
           <Spacer grow={1} />
           <div className={styles.talentInner}>
-            <div className={styles.heading2Block}>
+            <motion.div
+              className={styles.heading2Block}
+              initial={{ width: 0 }}
+              transition={{ delay: 0.25, duration: 0.5, ease: "circInOut" }}
+              viewport={{ once: true }}
+              whileInView={{ width: "100%" }}
+            >
               <h2 className={`${styles.heading2} ${raleway.className}`}>
                 TALENT
               </h2>
-            </div>
+            </motion.div>
             <div className={styles.talentWrapper}>
               <div className={styles.debutsWrapper}>
                 {debutYearAndMonthList.map((debut) => (
@@ -368,11 +386,17 @@ export default function App({
         <article className={`${styles.contactArticle} pattern-triangles-lg`}>
           <Spacer grow={1} />
           <div className={styles.contactInner}>
-            <div className={styles.heading2Block}>
+            <motion.div
+              className={styles.heading2Block}
+              initial={{ width: 0 }}
+              transition={{ delay: 0.25, duration: 0.5, ease: "circInOut" }}
+              viewport={{ once: true }}
+              whileInView={{ width: "100%" }}
+            >
               <h2 className={`${styles.heading2} ${raleway.className}`}>
                 CONTACT
               </h2>
-            </div>
+            </motion.div>
             <div className={styles.formWrapper}>
               <Spacer />
               <form

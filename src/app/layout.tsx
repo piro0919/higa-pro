@@ -18,7 +18,10 @@ const mPlus1 = MPlus1({ subsets: ["latin"], weight: "400" });
 export const metadata = {
   description:
     "Vライバー配信アプリIRIAM（イリアム）の事務所「H Production（ヒガプロダクション）」の公式サイトです。",
-  title: "Higa Production（ヒガプロダクション）公式サイト",
+  title: {
+    default: "Higa Production（ヒガプロダクション）公式サイト",
+    template: "%s | Higa Production（ヒガプロダクション）公式サイト",
+  },
 };
 
 export type RootLayoutProps = {
