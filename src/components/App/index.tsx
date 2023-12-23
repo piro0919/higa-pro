@@ -334,18 +334,12 @@ export default function App({
                 key={searchParams.get("debut") || debutYearAndMonthList[0]}
               >
                 {arraySort(
-                  talents
-                    .filter(
-                      ({ debut }) =>
-                        dayjs(debut).format("YYYY.MM") ===
-                        (searchParams.get("debut")?.replace("-", ".") ||
-                          debutYearAndMonthList[0])
-                    )
-                    // TODO あとで消す
-                    .map(({ image, ...talent }) => ({
-                      ...talent,
-                      image: image?.url.includes("HIGApro") ? undefined : image,
-                    })),
+                  talents.filter(
+                    ({ debut }) =>
+                      dayjs(debut).format("YYYY.MM") ===
+                      (searchParams.get("debut")?.replace("-", ".") ||
+                        debutYearAndMonthList[0])
+                  ),
                   ["image", "furigana"]
                 ).map(({ furigana, id, image, name }) => (
                   <Link href={`/talents/${furigana}`} key={id}>

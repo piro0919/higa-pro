@@ -36,19 +36,16 @@
   }
 }
 
+.talentImageWrapper3 {
+  left: 50%;
+  position: relative;
+  transform: translate(-50%, 0);
+}
+
 .talentImage,
 .noDataImage {
   filter: drop-shadow(12px 12px rgba(#063f5c, 0.5));
   object-position: top;
-}
-
-.talentImage {
-  @include mq.mq($until: tablet) {
-    object-fit: cover;
-  }
-  @include mq.mq($from: tablet) {
-    object-fit: contain;
-  }
 }
 
 .noDataImage {

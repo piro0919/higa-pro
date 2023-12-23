@@ -6,8 +6,6 @@ import { ReactNode } from "react";
 import "react-modern-drawer/dist/index.css";
 import "react-toastify/dist/ReactToastify.css";
 import "ress";
-import "slick-carousel/slick/slick-theme.css";
-import "slick-carousel/slick/slick.css";
 // eslint-disable-next-line postcss-modules/no-unused-class
 import "./globals.scss";
 import "./mq-settings.scss";

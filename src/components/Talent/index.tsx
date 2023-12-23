@@ -165,7 +165,7 @@ export default function Talent({
         ) : null}
         <div className={styles.talentWrapper}>
           <motion.div
-            animate={{ scale: loaded ? 1 : 0 }}
+            animate={{ scale: !image || loaded ? 1 : 0 }}
             className={styles.talentImageWrapper}
             initial={{ scale: 0 }}
             transition={{
@@ -173,25 +173,36 @@ export default function Talent({
               ease: "backOut",
             }}
           >
-            {image &&
-            // TODO あとで消す
-            !image?.url.includes("HIGApro") ? (
-              <Image
-                alt={name}
-                className={styles.talentImage}
-                fill={true}
-                onLoad={onLoaded}
-                quality={100}
-                src={image.url}
-              />
+            {image ? (
+              <div
+                className={styles.talentImageWrapper3}
+                style={{
+                  height: "200dvh",
+                  width: `calc(200dvh * ${image.width / image.height})`,
+                }}
+              >
+                <Image
+                  alt={name}
+                  className={styles.talentImage}
+                  fill={true}
+                  onLoad={onLoaded}
+                  quality={100}
+                  src={image.url}
+                />
+              </div>
             ) : (
-              <Image
-                alt={name}
-                className={styles.noDataImage}
-                fill={true}
-                quality={100}
-                src="/no-data.png"
-              />
+              <div
+                className={styles.talentImageWrapper3}
+                style={{ maxHeight: 576, maxWidth: 1024 }}
+              >
+                <Image
+                  alt={name}
+                  className={styles.noDataImage}
+                  fill={true}
+                  quality={100}
+                  src="/no-data.png"
+                />
+              </div>
             )}
           </motion.div>
           <div className={styles.nameWrapper}>
@@ -296,18 +307,12 @@ export default function Talent({
                 key={searchParams.get("debut") || debutYearAndMonthList[0]}
               >
                 {arraySort(
-                  talents
-                    .filter(
-                      ({ debut: talentDebut }) =>
-                        dayjs(talentDebut).format("YYYY.MM") ===
-                        (searchParams.get("debut")?.replace("-", ".") ||
-                          dayjs(debut).format("YYYY.MM"))
-                    )
-                    // TODO あとで消す
-                    .map(({ image, ...talent }) => ({
-                      ...talent,
-                      image: image?.url.includes("HIGApro") ? undefined : image,
-                    })),
+                  talents.filter(
+                    ({ debut: talentDebut }) =>
+                      dayjs(talentDebut).format("YYYY.MM") ===
+                      (searchParams.get("debut")?.replace("-", ".") ||
+                        dayjs(debut).format("YYYY.MM"))
+                  ),
                   ["image", "furigana"]
                 ).map(({ furigana, id, image, name }) => (
                   <Link href={`/talents/${furigana}`} key={id}>
