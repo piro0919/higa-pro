@@ -321,7 +321,8 @@ export default function App({
                             debut: debut.replace(".", "-"),
                           },
                           url: "/",
-                        })}#talents`
+                        })}#talents`,
+                        { scroll: false }
                       );
                     }}
                   >

@@ -294,7 +294,8 @@ export default function Talent({
                             debut: debutYearAndMonth.replace(".", "-"),
                           },
                           url: `/talents/${furigana}`,
-                        })}#talents`
+                        })}#talents`,
+                        { scroll: false }
                       );
                     }}
                   >
