@@ -1,8 +1,9 @@
 import NoSSR from "@mpth/react-no-ssr";
 import { Jost } from "next/font/google";
 import Link from "next/link";
-import { ComponentProps } from "react";
+import { ComponentProps, useMemo } from "react";
 import ReactModernDrawer from "react-modern-drawer";
+import { scroller } from "react-scroll";
 import styles from "./style.module.scss";
 
 const jost = Jost({ subsets: ["latin"], weight: "700" });
@@ -13,6 +14,44 @@ export type DrawerProps = Pick<
 >;
 
 export default function Drawer({ onClose, open }: DrawerProps): JSX.Element {
+  const items = useMemo(
+    () =>
+      [
+        {
+          name: "ABOUT",
+          to: "about",
+        },
+        {
+          name: "NEWS",
+          to: "news",
+        },
+        {
+          name: "TALENT",
+          to: "talents",
+        },
+        {
+          name: "CONTACT",
+          to: "contact",
+        },
+      ].map(({ name, to }) => (
+        <li key={to}>
+          <Link
+            className={`${styles.link} ${jost.className}`}
+            href={`/#${to}`}
+            onClick={(): void => {
+              scroller.scrollTo(to, {
+                smooth: false,
+              });
+            }}
+            scroll={false}
+          >
+            <span onClick={onClose}>{name}</span>
+          </Link>
+        </li>
+      )),
+    [onClose]
+  );
+
   return (
     <NoSSR>
       <ReactModernDrawer
@@ -27,32 +66,7 @@ export default function Drawer({ onClose, open }: DrawerProps): JSX.Element {
               <span onClick={onClose}>TOP</span>
             </Link>
           </li>
-          <li>
-            <Link className={`${styles.link} ${jost.className}`} href="/#about">
-              <span onClick={onClose}>ABOUT</span>
-            </Link>
-          </li>
-          <li>
-            <Link className={`${styles.link} ${jost.className}`} href="/#news">
-              <span onClick={onClose}>NEWS</span>
-            </Link>
-          </li>
-          <li>
-            <Link
-              className={`${styles.link} ${jost.className}`}
-              href="/#talents"
-            >
-              <span onClick={onClose}>TALENT</span>
-            </Link>
-          </li>
-          <li>
-            <Link
-              className={`${styles.link} ${jost.className}`}
-              href="/#contact"
-            >
-              <span onClick={onClose}>CONTACT</span>
-            </Link>
-          </li>
+          {items}
         </ul>
       </ReactModernDrawer>
     </NoSSR>
