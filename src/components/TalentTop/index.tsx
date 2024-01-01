@@ -45,7 +45,7 @@ export default function TalentTop({
           }}
           className={styles.imageBlock}
           initial={{ opacity: 0, transform: "translate(25dvw, 0)" }}
-          style={{ width: `calc(190dvh * ${width / height})` }}
+          style={{ width: `calc(190svh * ${width / height})` }}
           transition={{
             duration: 0.75,
             ease: "backOut",
