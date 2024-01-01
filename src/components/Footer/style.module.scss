@@ -1,14 +1,11 @@
 .footer {
-  background-color: #6777ff;
+  align-items: center;
+  background-color: #063f5c;
   background-repeat: repeat;
   /* stylelint-disable-next-line csstree/validator */
   color: rgba(#fff, 0.25);
   display: flex;
-}
-
-.footerInner {
-  display: grid;
-  text-align: center;
+  flex-direction: column;
 }
 
 .copyrightBlock {

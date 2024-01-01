@@ -1,75 +1,74 @@
 "use client";
-import { usePathname } from "next/navigation";
+import { motion } from "framer-motion";
 import { ReactNode } from "react";
 import HamburgerMenu from "react-hamburger-menu";
-import ModalContainer from "react-modal-promise";
 import { ToastContainer } from "react-toastify";
 import useMeasure from "react-use-measure";
 import { useBoolean } from "usehooks-ts";
-import Footer from "../Footer";
-import Header from "../Header";
 import styles from "./style.module.scss";
 import Drawer from "@/components/Drawer";
+import Footer from "@/components/Footer";
+import Header from "@/components/Header";
 
-export type LayoutProps = {
-  children: ReactNode;
-};
+export type LayoutProps = { children: ReactNode };
 
 export default function Layout({ children }: LayoutProps): JSX.Element {
+  const [ref, { height }] = useMeasure();
   const {
     setFalse: offIsOpen,
-    toggle: toggleIsOpen,
+    setTrue: onIsOpen,
     value: isOpen,
   } = useBoolean(false);
-  const [headerRef, { height: headerHeight }] = useMeasure();
-  const [footerRef, { height: footerHeight }] = useMeasure();
-  const pathname = usePathname();
 
   return (
     <>
+      <h1 className={styles.h1}>
+        Higa Production（ヒガプロダクション）公式サイト
+      </h1>
       <div className={styles.wrapper}>
-        <div
-          className={styles.headerWrapper}
-          style={
-            pathname !== "/"
-              ? {
-                  height: `calc(100% - ${headerHeight / 2}px)`,
-                  top: headerHeight / 2,
-                }
-              : undefined
-          }
-        >
-          <div
-            className={styles.headerWrapper2}
-            ref={headerRef}
-            style={{ marginTop: headerHeight / -2 }}
+        <div className={styles.headerBlock}>
+          <motion.div
+            animate={{
+              clipPath: `inset(0 ${height > 0 ? 0 : 50}% 0 ${
+                height > 0 ? 0 : 50
+              }%)`,
+            }}
+            className={styles.headerBlock2}
+            initial={{ clipPath: "inset(0 50% 0 50%)" }}
+            ref={ref}
+            style={{ marginTop: height / -2 }}
+            transition={{
+              duration: 0.5,
+              ease: (x: number): number => 1 - Math.pow(1 - x, 4),
+            }}
           >
-            <Header />
-          </div>
+            <div className={styles.headerWrapper}>
+              <Header />
+            </div>
+            <div className={styles.buttonWrapper}>
+              <button
+                className={`${styles.button} pattern-cross-dots-lg`}
+                onClick={onIsOpen}
+              >
+                <HamburgerMenu
+                  color="#fff"
+                  height={18}
+                  isOpen={isOpen}
+                  // eslint-disable-next-line @typescript-eslint/no-empty-function
+                  menuClicked={(): void => {}}
+                  width={24}
+                />
+              </button>
+            </div>
+          </motion.div>
         </div>
-        <main style={{ minHeight: `calc(100dvh - ${footerHeight}px)` }}>
-          {children}
-        </main>
-        <div className={styles.footerWrapper} ref={footerRef}>
-          <Footer />
-        </div>
-        <div className={styles.drawerWrapper}>
-          <Drawer onClose={offIsOpen} open={isOpen} />
-        </div>
-        <div className={styles.hamburgerMenuWrapper}>
-          <div className={`${styles.hamburgerMenuInner} pattern-cross-dots-lg`}>
-            <HamburgerMenu
-              color="#fff"
-              height={20}
-              isOpen={isOpen}
-              menuClicked={toggleIsOpen}
-              width={24}
-            />
-          </div>
-        </div>
+        <main>{children}</main>
+        <Footer />
       </div>
-      <ToastContainer position="bottom-left" />
-      <ModalContainer />
+      <div className={styles.drawerBlock}>
+        <Drawer onClose={offIsOpen} open={isOpen} />
+      </div>
+      <ToastContainer position="bottom-center" />
     </>
   );
 }

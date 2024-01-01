@@ -1,17 +1,27 @@
-.drawer {
-  height: auto !important;
+.navWrapper {
+  background-color: #063f5c;
+  background-repeat: repeat;
+  /* stylelint-disable-next-line csstree/validator */
+  color: rgba(#fff, 0.25);
+  height: 100%;
 }
 
 .list {
   display: flex;
   flex-direction: column;
+  font-size: 1.8rem;
   gap: 36px;
   padding: 48px 0;
   text-align: center;
 }
 
 .link {
-  color: #6777ff;
+  color: #fff;
   font-size: 1.8rem;
   font-weight: 900;
+  transition: 250ms;
+}
+
+.active {
+  color: #6777ff;
 }

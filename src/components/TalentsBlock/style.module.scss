@@ -1,0 +1,29 @@
+.wrapper {
+  display: flex;
+  height: 100%;
+}
+
+.talentsWrapper {
+  display: grid;
+  height: 100%;
+}
+
+.talentImageBlock {
+  clip-path: polygon(48px 0%, 100% 0%, calc(100% - 48px) 100%, 0% 100%);
+  margin: 0 0 0 -48px;
+}
+
+.talentImageInner {
+  height: 100%;
+  position: relative;
+}
+
+.talentImage {
+  object-fit: cover;
+  @include mq.mq($until: desktop) {
+    filter: drop-shadow(4px 4px rgba(#063f5c, 0.75));
+  }
+  @include mq.mq($from: desktop) {
+    filter: drop-shadow(8px 8px rgba(#063f5c, 0.75));
+  }
+}

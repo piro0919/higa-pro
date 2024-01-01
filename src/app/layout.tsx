@@ -1,4 +1,5 @@
 // eslint-disable-next-line filenames/match-exported
+import { Metadata } from "next";
 import { M_PLUS_1 as MPlus1 } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
 import "pattern.css";
@@ -10,16 +11,23 @@ import "ress";
 import "./globals.scss";
 import "./mq-settings.scss";
 import Layout from "@/components/Layout";
+import defaultMetadata from "@/lib/defaultMetadata";
 
 const mPlus1 = MPlus1({ subsets: ["latin"], weight: "400" });
+const url = "https://www.higapro.jp";
 
-export const metadata = {
-  description:
-    "Vライバー配信アプリIRIAM（イリアム）の事務所「H Production（ヒガプロダクション）」の公式サイトです。",
-  title: {
-    default: "Higa Production（ヒガプロダクション）公式サイト",
-    template: "%s | Higa Production（ヒガプロダクション）公式サイト",
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
   },
+  description: defaultMetadata.description,
+  metadataBase: new URL(url),
+  openGraph: defaultMetadata.openGraph,
+  title: {
+    default: defaultMetadata.siteName,
+    template: `%s | ${defaultMetadata.siteName}`,
+  },
+  twitter: defaultMetadata.twitter,
 };
 
 export type RootLayoutProps = {

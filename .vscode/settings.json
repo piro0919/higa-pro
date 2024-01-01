@@ -5,7 +5,9 @@
     "**/.hg": true,
     "**/.svn": true,
     "**/CVS": true,
-    "**/node_modules": false,
+    "**/node_modules": true,
     "**/Thumbs.db": true
-  }
+  },
+  "npm.autoDetect": "off",
+  "typescript.tsc.autoDetect": "off"
 }

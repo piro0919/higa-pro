@@ -26,6 +26,7 @@
   ],
   "rules": {
     "@typescript-eslint/explicit-function-return-type": "error",
+    "@typescript-eslint/no-misused-promises": "off",
     "@typescript-eslint/no-unused-vars": "off",
     "ext/lines-between-object-properties": ["error", "never"],
     "filenames/match-exported": ["error", ["camel", "kebab", "pascal"]],

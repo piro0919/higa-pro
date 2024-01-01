@@ -1,0 +1,38 @@
+.wrapper {
+  height: 95dvh;
+  position: relative;
+}
+
+.inner {
+  inset: 0;
+  position: absolute;
+}
+
+.inner2 {
+  align-items: center;
+  /* stylelint-disable-next-line csstree/validator */
+  background-color: rgba(#fff, 0.25);
+  background-repeat: repeat;
+  /* stylelint-disable-next-line csstree/validator */
+  color: rgba(#fff, 0.25);
+  display: flex;
+  inset: 0;
+  justify-content: center;
+  position: absolute;
+}
+
+.imageBlockWrapper {
+  backdrop-filter: blur(1px);
+  border-radius: 50dvmax;
+}
+
+.imageBlock {
+  filter: drop-shadow(0 0 5px #666) drop-shadow(0 0 15px rgba(#fff, 0.5))
+    drop-shadow(0 0 25px rgba(#6777ff, 0.5))
+    drop-shadow(0 0 35px rgba(#6777ff, 0.25));
+  /* stylelint-disable-next-line csstree/validator */
+  height: min(480px, 80dvmin);
+  position: relative;
+  /* stylelint-disable-next-line csstree/validator */
+  width: min(480px, 80dvmin);
+}

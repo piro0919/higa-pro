@@ -9,7 +9,8 @@ html {
 
 body {
   font-family: arial, sans-serif;
-  letter-spacing: 0.5px;
+  font-size: 1.6rem;
+  letter-spacing: 1px;
   overflow-x: hidden;
 }
 
@@ -23,6 +24,7 @@ a {
   text-decoration: none;
 }
 
+canvas,
 img,
 svg {
   background-repeat: no-repeat;
@@ -39,7 +41,19 @@ ul {
   list-style: none;
 }
 
+.EZDrawer__container {
+  height: auto !important;
+}
+
 .ReactModal__Overlay {
-  backdrop-filter: blur(1px);
-  z-index: 101;
+  z-index: 1;
+}
+
+.swal2-popup {
+  font-size: 1.6rem;
+  width: auto;
+}
+
+.Typewriter__cursor {
+  display: none;
 }

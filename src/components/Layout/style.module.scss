@@ -1,21 +1,23 @@
+.h1 {
+  height: 1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  width: 1px;
+}
+
 .wrapper {
   position: relative;
 }
 
-.headerWrapper {
+.headerBlock {
   height: calc(100% - 95dvh);
   position: absolute;
   top: 95dvh;
   width: 100%;
-  @include mq.mq($until: tablet) {
-    display: none;
-  }
-  @include mq.mq($from: tablet) {
-    display: block;
-  }
 }
 
-.headerWrapper2 {
+.headerBlock2 {
   display: flex;
   justify-content: center;
   position: sticky;
@@ -29,41 +31,45 @@
   }
 }
 
-.footerWrapper {
-  position: relative;
+.headerWrapper {
+  width: 100%;
+  @include mq.mq($until: tablet) {
+    display: none;
+  }
+  @include mq.mq($from: tablet) {
+    display: flex;
+    justify-content: center;
+  }
 }
 
-.drawerWrapper {
+.buttonWrapper {
+  width: 100%;
   @include mq.mq($until: tablet) {
-    display: block;
+    display: flex;
+    justify-content: flex-end;
   }
   @include mq.mq($from: tablet) {
     display: none;
   }
 }
 
-.hamburgerMenuWrapper {
-  position: fixed;
-  right: 12px;
-  top: 12px;
-  z-index: 101;
-  @include mq.mq($until: tablet) {
-    display: block;
-  }
-  @include mq.mq($from: tablet) {
-    display: none;
-  }
-}
-
-.hamburgerMenuInner {
+.button {
   backdrop-filter: blur(1px);
   /* stylelint-disable-next-line csstree/validator */
-  background-color: rgba(#6777ff, 0.95);
+  background-color: rgba(#063f5c, 0.95);
   background-repeat: repeat;
   border: 2px solid #fff;
   border-radius: 50dvmax;
   /* stylelint-disable-next-line csstree/validator */
   color: rgba(#fff, 0.25);
-  cursor: pointer;
-  padding: 12px;
+  padding: 15px 12px;
+}
+
+.drawerBlock {
+  @include mq.mq($until: tablet) {
+    display: block;
+  }
+  @include mq.mq($from: tablet) {
+    display: none;
+  }
 }

@@ -1,0 +1,46 @@
+/* stylelint-disable-next-line plugin/sass-render-errors */
+@import "@/styles/mixin";
+
+.article {
+  max-width: 1280px;
+  position: relative;
+  width: 100%;
+}
+
+.h2Block {
+  overflow: hidden;
+  position: absolute;
+  @include mq.mq($until: tablet) {
+    bottom: calc(100% - 16px);
+  }
+  @include mq.mq($from: tablet, $until: desktop) {
+    bottom: calc(100% - 23px);
+  }
+  @include mq.mq($from: desktop) {
+    bottom: calc(100% - 29px);
+  }
+}
+
+.h2 {
+  color: #fff;
+  letter-spacing: 2px;
+  @include mq.mq($until: tablet) {
+    filter: drop-shadow(4px 0 rgba(#063f5c, 0.75));
+    font-size: 7.2rem;
+  }
+  @include mq.mq($from: tablet, $until: desktop) {
+    filter: drop-shadow(6px 0 rgba(#063f5c, 0.75));
+    font-size: 9.6rem;
+  }
+  @include mq.mq($from: desktop) {
+    filter: drop-shadow(8px 0 rgba(#063f5c, 0.75));
+    font-size: 12rem;
+  }
+}
+
+.content {
+  @include border-animation;
+  border-radius: 0 24px;
+  overflow: hidden;
+  padding: 6px;
+}

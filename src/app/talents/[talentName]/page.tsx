@@ -1,36 +1,13 @@
-/* eslint-disable filenames/match-exported */
 import {
   MicroCMSContentId,
   MicroCMSDate,
   MicroCMSListResponse,
 } from "microcms-js-sdk";
 import { Metadata } from "next";
+import { notFound } from "next/navigation";
 import Talent, { TalentProps } from "@/components/Talent";
-import client from "@/libs/client";
-
-type StaticParam = {
-  talentName: string;
-};
-
-type StaticParams = StaticParam[];
-
-export async function generateStaticParams(): Promise<StaticParams> {
-  const { contents } = await client.getList<MicroCMS.Talent>({
-    customRequestInit: {
-      next: {
-        revalidate: process.env.VERCEL_ENV === "production" ? 60 * 60 : false,
-      },
-    },
-    endpoint: "talents",
-    queries: {
-      limit: 100,
-    },
-  });
-
-  return contents.map(({ furigana }) => ({
-    talentName: furigana,
-  }));
-}
+import client from "@/lib/client";
+import defaultMetadata from "@/lib/defaultMetadata";
 
 type GetTalentParams = {
   furigana: string;
@@ -65,33 +42,14 @@ async function getTalent({
   return response;
 }
 
-type GetTalentListData = MicroCMSListResponse<MicroCMS.Talent>;
-
-async function getTalentList(): Promise<GetTalentListData> {
-  const response = await client.getList<MicroCMS.Talent>({
-    customRequestInit: {
-      next: {
-        revalidate: process.env.VERCEL_ENV === "production" ? 60 * 60 : false,
-      },
-    },
-    endpoint: "talents",
-    queries: {
-      limit: 100,
-    },
-  });
-
-  return response;
-}
-
-type TalentNameProps = {
-  params: {
-    talentName: string;
-  };
+export type PageProps = {
+  params: { talentName: string };
+  searchParams: { [key: string]: string | string[] | undefined };
 };
 
 export async function generateMetadata({
   params: { talentName },
-}: TalentNameProps): Promise<Metadata> {
+}: PageProps): Promise<Metadata> {
   const [contentId] = await client.getAllContentIds({
     customRequestInit: {
       next: {
@@ -114,41 +72,78 @@ export async function generateMetadata({
   });
 
   return {
+    alternates: {
+      canonical: `/talents/${talentName}`,
+    },
     description: profile,
+    openGraph: {
+      ...defaultMetadata.openGraph,
+      description: profile,
+      title: name,
+      type: "article",
+      url: `/talents/${talentName}`,
+    },
     title: name,
+    twitter: {
+      ...defaultMetadata.twitter,
+      description: profile,
+      title: name,
+    },
   };
 }
 
-export default async function TalentName({
+type GetTalentListData = MicroCMSListResponse<MicroCMS.Talent>;
+
+async function getTalentList(): Promise<GetTalentListData> {
+  const response = await client.getList<MicroCMS.Talent>({
+    customRequestInit: {
+      next: {
+        revalidate: process.env.VERCEL_ENV === "production" ? 60 * 60 : false,
+      },
+    },
+    endpoint: "talents",
+    queries: {
+      limit: 100,
+    },
+  });
+
+  return response;
+}
+
+export default async function Page({
   params: { talentName },
-}: TalentNameProps): Promise<JSX.Element> {
-  const { debut, furigana, images, iriamUrl, name, profile, rank, twitterUrl } =
-    await getTalent({
-      furigana: talentName,
-    });
+}: PageProps): Promise<JSX.Element> {
+  const { images, iriamUrl, name, profile, twitterUrl } = await getTalent({
+    furigana: talentName,
+  });
+
+  if (!images) {
+    notFound();
+  }
+
+  const { height, url, width } = images[0];
   const { contents: talentListContents } = await getTalentList();
-  const talents: TalentProps["talents"] = talentListContents.map(
-    ({ debut, furigana, id, images, name, rank }) => ({
+  const talents: TalentProps["talents"] = talentListContents
+    .filter(({ furigana }) => talentName !== furigana)
+    .map(({ debut, furigana, id, images, name, rank }) => ({
       debut,
       furigana,
       id,
       image: images?.at(0),
       name,
       rank,
-    })
-  );
+    }));
 
   return (
     <Talent
-      debut={debut}
-      furigana={furigana}
-      image={images?.at(0)}
+      height={height}
       iriamUrl={iriamUrl}
       name={name}
       profile={profile}
-      rank={rank}
       talents={talents}
       twitterUrl={twitterUrl}
+      url={url}
+      width={width}
     />
   );
 }

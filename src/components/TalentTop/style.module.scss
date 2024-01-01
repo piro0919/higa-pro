@@ -1,0 +1,192 @@
+.wrapper {
+  height: 95dvh;
+  position: relative;
+}
+
+.inner {
+  inset: 0;
+  position: absolute;
+}
+
+.inner2 {
+  backdrop-filter: blur(2px);
+  /* stylelint-disable-next-line csstree/validator */
+  background-color: rgba(#fff, 0.5);
+  background-repeat: repeat;
+  /* stylelint-disable-next-line csstree/validator */
+  color: rgba(#fff, 0.25);
+  display: grid;
+  inset: 0;
+  justify-content: center;
+  overflow: hidden;
+  position: absolute;
+}
+
+.imageBlock {
+  height: 190dvh;
+  margin: 12px 0 0;
+  position: relative;
+}
+
+.image {
+  filter: drop-shadow(12px 12px rgba(#063f5c, 0.5));
+}
+
+@keyframes grid-animation {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: -25px -25px;
+  }
+}
+
+.messageWrapper {
+  animation: grid-animation 1s infinite linear;
+  backdrop-filter: blur(2px);
+  /* stylelint-disable-next-line csstree/validator */
+  background-color: rgba(#fff, 0.75);
+  background-repeat: repeat;
+  /* stylelint-disable-next-line csstree/validator */
+  color: rgba(#fff, 0.5);
+  display: flex;
+  height: 30%;
+  inset: auto 0 0;
+  justify-content: center;
+  position: absolute;
+  width: 100%;
+  @include mq.mq($until: desktop) {
+    padding: 0 12px;
+  }
+  @include mq.mq($from: desktop) {
+    padding: 0 72px;
+  }
+}
+
+.messageBlock {
+  max-width: 960px;
+  padding: 24px 0 36px;
+  position: relative;
+  width: 100%;
+}
+
+.nameBlock {
+  align-items: center;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  right: 0;
+  top: 0;
+  @include mq.mq($until: tablet) {
+    height: 52px;
+    margin-top: -40px;
+  }
+  @include mq.mq($from: tablet) {
+    height: 98px;
+    margin-top: -86px;
+  }
+}
+
+.nameInner {
+  align-items: center;
+  display: flex;
+  height: inherit;
+}
+
+.h2 {
+  color: #fff;
+  letter-spacing: 4px;
+  /* stylelint-disable-next-line csstree/validator */
+  text-shadow: 4px 4px rgba(#063f5c, 0.5);
+  -webkit-text-stroke: 1px #063f5c;
+  @include mq.mq($until: tablet) {
+    font-size: 4.8rem;
+  }
+  @include mq.mq($from: tablet) {
+    font-size: 8.4rem;
+  }
+}
+
+.profileWrapper {
+  display: grid;
+  gap: 12px;
+  height: 100%;
+  @include mq.mq($until: tablet) {
+    grid-template: auto / auto;
+    overflow: hidden auto;
+  }
+  @include mq.mq($from: tablet) {
+    grid-template: auto / 1fr auto;
+    overflow: hidden visible;
+  }
+}
+
+.profileBlock {
+  color: #063f5c;
+  font-size: 1.8rem;
+  font-weight: 900;
+  line-height: 1.5;
+  /* stylelint-disable-next-line csstree/validator */
+  text-shadow: 2px 2px rgba(#fff, 0.75);
+  @include mq.mq($until: tablet) {
+    height: auto;
+    overflow-y: visible;
+  }
+  @include mq.mq($from: tablet) {
+    height: 100%;
+    overflow-y: auto;
+  }
+}
+
+.profileBlock2 {
+  color: #063f5c;
+  display: flex;
+  flex-direction: column;
+  font-size: 1.6rem;
+  font-weight: 900;
+  gap: 12px;
+  /* stylelint-disable-next-line csstree/validator */
+  text-shadow: 2px 2px rgba(#fff, 0.75);
+}
+
+.item {
+  align-items: center;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.buttonsWrapper {
+  display: grid;
+  gap: 12px;
+  grid-template: auto / repeat(2, 150px);
+  justify-content: center;
+}
+
+.button {
+  align-items: center;
+  background-color: #063f5c;
+  background-repeat: repeat;
+  border: 4px solid #fff;
+  border-radius: 50dvmax;
+  /* stylelint-disable-next-line csstree/validator */
+  color: rgba(#fff, 0.25);
+  display: flex;
+  font-size: 1.6rem;
+  font-weight: 900;
+  gap: 16px;
+  padding: 8px 32px 8px 8px;
+}
+
+.iconBlock {
+  border-radius: 50dvmax;
+  height: 36px;
+  overflow: hidden;
+  position: relative;
+  width: 36px;
+}
+
+.buttonText {
+  color: #fff;
+}
