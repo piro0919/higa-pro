@@ -8,8 +8,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useParams, usePathname, useSearchParams } from "next/navigation";
 import queryString from "query-string";
-import { useMemo, useRef } from "react";
-import { useIntersectionObserver } from "usehooks-ts";
+import { useEffect, useMemo, useRef } from "react";
+import { useBoolean, useIntersectionObserver } from "usehooks-ts";
 import styles from "./style.module.scss";
 import Article from "@/components/Article";
 
@@ -83,10 +83,11 @@ export default function TalentBlock({
     freezeOnceVisible: true,
     rootMargin: "-25%",
   });
-  const isLoaded = useMemo(
-    () => entry?.isIntersecting,
-    [entry?.isIntersecting],
-  );
+  const { setValue: setIsLoaded, value: isLoaded } = useBoolean(false);
+
+  useEffect(() => {
+    setIsLoaded(!window.IntersectionObserver || !!entry?.isIntersecting);
+  }, [entry?.isIntersecting, setIsLoaded]);
 
   return (
     <div className={`${styles.wrapper} pattern-zigzag-lg`} ref={ref}>

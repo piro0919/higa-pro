@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Raleway } from "next/font/google";
-import { ReactNode, useMemo, useRef } from "react";
-import { useIntersectionObserver } from "usehooks-ts";
+import { ReactNode, useEffect, useRef } from "react";
+import { useBoolean, useIntersectionObserver } from "usehooks-ts";
 import styles from "./style.module.scss";
 
 const raleway = Raleway({ subsets: ["latin"], weight: "800" });
@@ -20,10 +20,11 @@ export default function Article({
     freezeOnceVisible: true,
     rootMargin: "-25%",
   });
-  const isVisible = useMemo(
-    () => !!entry?.isIntersecting,
-    [entry?.isIntersecting],
-  );
+  const { setValue: setIsVisible, value: isVisible } = useBoolean(false);
+
+  useEffect(() => {
+    setIsVisible(!window.IntersectionObserver || !!entry?.isIntersecting);
+  }, [entry?.isIntersecting, setIsVisible]);
 
   return (
     <article className={styles.article} ref={ref}>
