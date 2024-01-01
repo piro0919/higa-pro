@@ -16,7 +16,8 @@ export default function Article({
   heading,
 }: ArticleProps): JSX.Element {
   const { inView, ref } = useInView({
-    rootMargin: "0px 0px -25% 0px",
+    rootMargin: "-25% 0px -25% 0px",
+    triggerOnce: true,
   });
 
   return (

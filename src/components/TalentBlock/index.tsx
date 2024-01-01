@@ -79,7 +79,8 @@ export default function TalentBlock({
     [activeDebut, talentBlockPropTalents],
   );
   const { inView, ref } = useInView({
-    rootMargin: "0px 0px -25% 0px",
+    rootMargin: "-25% 0px -25% 0px",
+    triggerOnce: true,
   });
 
   return (
