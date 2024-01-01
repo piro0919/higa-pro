@@ -48,7 +48,7 @@ export default function TalentsBlock({
                 initial={{ transform: "translate(0, 0)" }}
                 key={index}
                 style={{
-                  gridTemplateColumns: `repeat(${talents.length}, min(180px, 25dvw))`,
+                  gridTemplateColumns: `repeat(${talents.length}, min(180px, 30dvw))`,
                 }}
                 transition={{ duration: 60, ease: "linear", repeat: Infinity }}
               >

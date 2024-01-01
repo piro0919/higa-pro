@@ -8,8 +8,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useParams, usePathname, useSearchParams } from "next/navigation";
 import queryString from "query-string";
-import { useEffect, useMemo, useRef } from "react";
-import { useBoolean, useIntersectionObserver } from "usehooks-ts";
+import { useMemo } from "react";
+import { useInView } from "react-intersection-observer";
 import styles from "./style.module.scss";
 import Article from "@/components/Article";
 
@@ -78,16 +78,9 @@ export default function TalentBlock({
       ),
     [activeDebut, talentBlockPropTalents],
   );
-  const ref = useRef<HTMLDivElement>(null);
-  const entry = useIntersectionObserver(ref, {
-    freezeOnceVisible: true,
-    rootMargin: "-25%",
+  const { inView, ref } = useInView({
+    rootMargin: "0px 0px -25% 0px",
   });
-  const { setValue: setIsLoaded, value: isLoaded } = useBoolean(false);
-
-  useEffect(() => {
-    setIsLoaded(!window.IntersectionObserver || !!entry?.isIntersecting);
-  }, [entry?.isIntersecting, setIsLoaded]);
 
   return (
     <div className={`${styles.wrapper} pattern-zigzag-lg`} ref={ref}>
@@ -118,9 +111,9 @@ export default function TalentBlock({
               const children = (
                 <motion.div
                   animate={{
-                    opacity: isLoaded ? 1 : 0,
-                    transform: `translate(${isLoaded ? 0 : 50}%, ${
-                      isLoaded ? 0 : 50
+                    opacity: inView ? 1 : 0,
+                    transform: `translate(${inView ? 0 : 50}%, ${
+                      inView ? 0 : 50
                     }%)`,
                   }}
                   className={`${styles.talentBlock} pattern-grid-md`}
@@ -134,8 +127,8 @@ export default function TalentBlock({
                   <div className={styles.talentInner}>
                     <motion.figure
                       animate={{
-                        clipPath: `inset(${isLoaded ? 0 : 100}% 0 0 ${
-                          isLoaded ? 0 : 100
+                        clipPath: `inset(${inView ? 0 : 100}% 0 0 ${
+                          inView ? 0 : 100
                         }%)`,
                       }}
                       className={styles.figure}
@@ -166,7 +159,7 @@ export default function TalentBlock({
                   <motion.div className={styles.nameBlock}>
                     <motion.div
                       animate={{
-                        transform: `translate(${isLoaded ? 0 : -200}%, 0)`,
+                        transform: `translate(${inView ? 0 : -200}%, 0)`,
                       }}
                       initial={{ transform: "translate(-200%, 0)" }}
                       transition={{
@@ -181,7 +174,7 @@ export default function TalentBlock({
                   <motion.div className={styles.furiganaBlock}>
                     <motion.div
                       animate={{
-                        transform: `translate(${isLoaded ? 0 : 200}%, 0)`,
+                        transform: `translate(${inView ? 0 : 200}%, 0)`,
                       }}
                       initial={{ transform: "translate(200%, 0)" }}
                       transition={{
