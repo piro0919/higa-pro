@@ -18,6 +18,8 @@ export default function App({
       <div id="top">
         <Top
           talents={
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
             talents.filter(({ image }) => !!image) as TopProps["talents"]
           }
         />

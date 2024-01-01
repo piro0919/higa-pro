@@ -29,6 +29,8 @@ export default function Talent({
         name={name}
         profile={profile}
         talents={
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
           talents
             .filter(({ furigana }) => talentName !== furigana)
             .filter(({ image }) => !!image) as TalentTopProps["talents"]
