@@ -27,7 +27,7 @@ export default function TalentsBlock({
   const { count, increment } = useCounter(0);
   const [talents, setTalents] = useState<typeof talentsBlockPropTalents>();
   const isLoaded = useMemo(
-    () => talents && count === talents.length * 2,
+    () => talents && count >= talents.length * 2,
     [count, talents],
   );
   const [ref, { height: wrapperHeight }] = useMeasure();
