@@ -123,16 +123,16 @@ export default async function Page({
 
   const { height, url, width } = images[0];
   const { contents: talentListContents } = await getTalentList();
-  const talents: TalentProps["talents"] = talentListContents
-    .filter(({ furigana }) => talentName !== furigana)
-    .map(({ debut, furigana, id, images, name, rank }) => ({
+  const talents: TalentProps["talents"] = talentListContents.map(
+    ({ debut, furigana, id, images, name, rank }) => ({
       debut,
       furigana,
       id,
       image: images?.at(0),
       name,
       rank,
-    }));
+    }),
+  );
 
   return (
     <Talent
