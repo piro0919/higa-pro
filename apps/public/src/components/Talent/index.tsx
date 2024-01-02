@@ -1,5 +1,4 @@
 "use client";
-import { useParams } from "next/navigation";
 import TalentBlock, { TalentBlockProps } from "@/components/TalentBlock";
 import TalentTop, { TalentTopProps } from "@/components/TalentTop";
 
@@ -19,8 +18,6 @@ export default function Talent({
   url,
   width,
 }: TalentProps): JSX.Element {
-  const { talentName } = useParams();
-
   return (
     <>
       <TalentTop
@@ -31,9 +28,7 @@ export default function Talent({
         talents={
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore
-          talents
-            .filter(({ furigana }) => talentName !== furigana)
-            .filter(({ image }) => !!image) as TalentTopProps["talents"]
+          talents.filter(({ image }) => !!image) as TalentTopProps["talents"]
         }
         twitterUrl={twitterUrl}
         url={url}

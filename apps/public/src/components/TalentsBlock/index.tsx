@@ -1,9 +1,8 @@
 "use client";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import useMeasure from "react-use-measure";
-import shuffle from "shuffle-array";
 import { useCounter } from "usehooks-ts";
 import styles from "./style.module.scss";
 
@@ -22,19 +21,14 @@ export type TalentsBlockProps = {
 };
 
 export default function TalentsBlock({
-  talents: talentsBlockPropTalents,
+  talents,
 }: TalentsBlockProps): JSX.Element {
   const { count, increment } = useCounter(0);
-  const [talents, setTalents] = useState<typeof talentsBlockPropTalents>();
   const isLoaded = useMemo(
     () => talents && count >= talents.length * 2,
     [count, talents],
   );
   const [ref, { height: wrapperHeight }] = useMeasure();
-
-  useEffect(() => {
-    setTalents(shuffle(talentsBlockPropTalents));
-  }, [talentsBlockPropTalents]);
 
   return (
     <div className={styles.wrapper} ref={ref}>
