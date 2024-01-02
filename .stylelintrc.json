@@ -16,13 +16,16 @@
     "css-modules/no-global-scoped-selector": [
       true,
       {
-        "fileExtensions": [".module.scss"]
+        "fileExtensions": [
+          ".module.scss"
+        ]
       }
     ],
     "csstree/validator": {
-      "syntaxExtensions": ["sass"]
+      "syntaxExtensions": [
+        "sass"
+      ]
     },
-    "declaration-block-trailing-semicolon": "always",
     "order/properties-alphabetical-order": true,
     "plugin/declaration-block-no-ignored-properties": true,
     "plugin/sass-render-errors": true,
