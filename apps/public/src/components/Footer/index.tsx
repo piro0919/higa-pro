@@ -11,7 +11,9 @@ export default function Footer(): JSX.Element {
         src="/logo.png"
         width={320}
       />
-      <div className={styles.copyrightBlock}>&copy; 2023 Higa Production</div>
+      <div className={styles.copyrightBlock}>
+        &copy; 2023 合同会社DreamGarage
+      </div>
     </footer>
   );
 }
