@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { Jost } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
-import { useParams, usePathname, useSearchParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import queryString from "query-string";
 import { useMemo } from "react";
 import { useInView } from "react-intersection-observer";
@@ -27,10 +27,12 @@ type Talent = {
 };
 
 export type TalentBlockProps = {
+  pathname: string;
   talents: Talent[];
 };
 
 export default function TalentBlock({
+  pathname,
   talents: talentBlockPropTalents,
 }: TalentBlockProps): JSX.Element {
   const debutList = useMemo(
@@ -46,7 +48,6 @@ export default function TalentBlock({
   );
   const { talentName } = useParams();
   const searchParams = useSearchParams();
-  const pathname = usePathname();
   const activeDebut = useMemo(() => {
     const debut = searchParams.get("debut");
 

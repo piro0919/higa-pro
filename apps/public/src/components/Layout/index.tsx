@@ -1,5 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
+import NextTopLoader from "nextjs-toploader";
 import { ReactNode } from "react";
 import HamburgerMenu from "react-hamburger-menu";
 import { ToastContainer } from "react-toastify";
@@ -68,6 +69,7 @@ export default function Layout({ children }: LayoutProps): JSX.Element {
       <div className={styles.drawerBlock}>
         <Drawer onClose={offIsOpen} open={isOpen} />
       </div>
+      <NextTopLoader />
       <ToastContainer position="bottom-center" />
     </>
   );

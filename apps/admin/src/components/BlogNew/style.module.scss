@@ -1,0 +1,14 @@
+.wrapper {
+  display: grid;
+  gap: 12px;
+  grid-template: auto 1fr / auto;
+  padding: 12px;
+}
+
+.topBlock {
+  display: flex;
+}
+
+.editor :global(.w-md-editor-text) {
+  min-height: 100% !important;
+}

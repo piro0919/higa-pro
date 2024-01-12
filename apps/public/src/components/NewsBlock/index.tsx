@@ -39,7 +39,7 @@ export default function NewsBlock({ newsList }: NewsBlockProps): JSX.Element {
                     }}
                   >
                     <div className={styles.dateBlock}>
-                      {dayjs(publishedAt).format("YYYY/MM/DD")}
+                      {dayjs(publishedAt).format("YYYY.M.D")}
                     </div>
                     <div>{title}</div>
                   </div>

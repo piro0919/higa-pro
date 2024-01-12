@@ -5,6 +5,15 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  reactStrictMode: false,
+  async rewrites() {
+    return [
+      {
+        source: "/talents/:talentName/blog/:blogId*",
+        destination: "/talents/:talentName?blogId=:blogId*",
+      },
+    ];
+  },
   sassOptions: {
     additionalData: async (content, { resourcePath }) => {
       if (resourcePath.includes("node_modules")) {

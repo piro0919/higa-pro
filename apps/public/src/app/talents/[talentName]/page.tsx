@@ -1,3 +1,4 @@
+import { Collection, EntryProps } from "contentful-management";
 import {
   MicroCMSContentId,
   MicroCMSDate,
@@ -6,8 +7,9 @@ import {
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Talent, { TalentProps } from "@/components/Talent";
-import client from "@/lib/client";
+import contentfulEnvironment from "@/lib/contentfulEnvironment";
 import defaultMetadata from "@/lib/defaultMetadata";
+import microcmsClient from "@/lib/microcmsClient";
 
 type GetTalentParams = {
   furigana: string;
@@ -18,7 +20,7 @@ type GetTalentData = MicroCMS.Talent & MicroCMSContentId & MicroCMSDate;
 async function getTalent({
   furigana,
 }: GetTalentParams): Promise<GetTalentData> {
-  const [contentId] = await client.getAllContentIds({
+  const [contentId] = await microcmsClient.getAllContentIds({
     customRequestInit: {
       next: {
         revalidate: process.env.VERCEL_ENV === "production" ? 60 * 60 : false,
@@ -27,7 +29,7 @@ async function getTalent({
     endpoint: "talents",
     filters: `furigana[equals]${furigana}`,
   });
-  const response = await client.get<
+  const response = await microcmsClient.get<
     MicroCMS.Talent & MicroCMSContentId & MicroCMSDate
   >({
     contentId,
@@ -50,7 +52,7 @@ export type PageProps = {
 export async function generateMetadata({
   params: { talentName },
 }: PageProps): Promise<Metadata> {
-  const [contentId] = await client.getAllContentIds({
+  const [contentId] = await microcmsClient.getAllContentIds({
     customRequestInit: {
       next: {
         revalidate: process.env.VERCEL_ENV === "production" ? 60 * 60 : false,
@@ -59,7 +61,7 @@ export async function generateMetadata({
     endpoint: "talents",
     filters: `furigana[equals]${talentName}`,
   });
-  const { name, profile } = await client.get<
+  const { name, profile } = await microcmsClient.get<
     MicroCMS.Talent & MicroCMSContentId & MicroCMSDate
   >({
     contentId,
@@ -95,7 +97,7 @@ export async function generateMetadata({
 type GetTalentListData = MicroCMSListResponse<MicroCMS.Talent>;
 
 async function getTalentList(): Promise<GetTalentListData> {
-  const response = await client.getList<MicroCMS.Talent>({
+  const response = await microcmsClient.getList<MicroCMS.Talent>({
     customRequestInit: {
       next: {
         revalidate: process.env.VERCEL_ENV === "production" ? 60 * 60 : false,
@@ -110,14 +112,49 @@ async function getTalentList(): Promise<GetTalentListData> {
   return response;
 }
 
+type GetBlogListData = Collection<
+  EntryProps<Contentful.IBlogFields>,
+  EntryProps<Contentful.IBlogFields>
+>;
+
+async function getBlogList(): Promise<GetBlogListData> {
+  const entries = (await contentfulEnvironment.getEntries({
+    content_type: "blog",
+    select: "fields.title,sys.createdAt,sys.id",
+  })) as unknown as Collection<
+    EntryProps<Contentful.IBlogFields>,
+    EntryProps<Contentful.IBlogFields>
+  >;
+
+  return entries;
+}
+
+type GetBlogParams = {
+  id: string;
+};
+
+type GetBlogData = EntryProps<Contentful.IBlogFields>;
+
+async function getBlog({ id }: GetBlogParams): Promise<GetBlogData> {
+  const entry = (await contentfulEnvironment.getEntry(
+    id,
+  )) as unknown as EntryProps<Contentful.IBlogFields>;
+
+  return entry;
+}
+
 export default async function Page({
   params: { talentName },
+  searchParams: { blogId },
 }: PageProps): Promise<JSX.Element> {
   const { images, iriamUrl, name, profile, twitterUrl } = await getTalent({
     furigana: talentName,
   });
 
-  if (!images) {
+  if (
+    !images ||
+    (typeof blogId !== "undefined" && typeof blogId !== "string")
+  ) {
     notFound();
   }
 
@@ -134,13 +171,50 @@ export default async function Page({
     }),
   );
 
+  if (typeof blogId === "undefined") {
+    const { items } = await getBlogList();
+    const blogList = items.map(
+      ({ fields: { title }, sys: { createdAt, id } }) => ({
+        createdAt,
+        id,
+        title: title.ja || "",
+      }),
+    );
+
+    return (
+      <Talent
+        blogList={blogList}
+        height={height}
+        iriamUrl={iriamUrl}
+        name={name}
+        profile={profile}
+        talents={talents}
+        twitterUrl={twitterUrl}
+        url={url}
+        width={width}
+      />
+    );
+  }
+
+  const {
+    fields: { content, talentId, title },
+    sys: { createdAt },
+  } = await getBlog({ id: blogId });
+
+  if (!content.ja || talentName !== talentId.ja) {
+    notFound();
+  }
+
   return (
     <Talent
+      content={content.ja}
+      createdAt={createdAt}
       height={height}
       iriamUrl={iriamUrl}
       name={name}
       profile={profile}
       talents={talents}
+      title={title.ja || ""}
       twitterUrl={twitterUrl}
       url={url}
       width={width}

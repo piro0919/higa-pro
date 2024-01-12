@@ -1,7 +1,6 @@
 // eslint-disable-next-line filenames/match-exported
 import { Metadata } from "next";
 import { M_PLUS_1 as MPlus1 } from "next/font/google";
-import NextTopLoader from "nextjs-toploader";
 import "pattern.css";
 import { ReactNode } from "react";
 import "react-modern-drawer/dist/index.css";
@@ -38,7 +37,6 @@ export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
   return (
     <html lang="ja">
       <body className={mPlus1.className}>
-        <NextTopLoader />
         <Layout>{children}</Layout>
       </body>
     </html>

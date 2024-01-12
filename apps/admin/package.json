@@ -1,0 +1,51 @@
+{
+  "dependencies": {
+    "@stytch/nextjs": "16.0.0",
+    "@stytch/vanilla-js": "4.1.0",
+    "@szhsin/react-menu": "4.1.0",
+    "@tanstack/react-table": "8.11.3",
+    "@uiw/react-md-editor": "4.0.2",
+    "contentful-management": "11.7.3",
+    "dayjs": "1.11.10",
+    "next": "14.0.4",
+    "nextjs-toploader": "1.6.4",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-icons": "4.12.0",
+    "react-spacer": "1.3.0",
+    "react-use-measure": "2.1.1",
+    "rehype-sanitize": "6.0.0",
+    "ress": "5.0.2",
+    "stytch": "10.1.0",
+    "usehooks-ts": "2.9.1",
+    "zustand": "4.4.7"
+  },
+  "devDependencies": {
+    "@total-typescript/ts-reset": "0.5.1",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "contentful-typescript-codegen": "3.4.0",
+    "next-sitemap": "4.2.3",
+    "sass": "1.69.7",
+    "sass-mq": "6.0.0",
+    "typescript": "^5"
+  },
+  "name": "admin",
+  "private": true,
+  "scripts": {
+    "build": "next build -p 4000",
+    "contentful-typescript-codegen": "contentful-typescript-codegen --namespace Contentful --output contentful.d.ts --localization",
+    "dev": "next dev -p 4000",
+    "lint": "next lint",
+    "lint:fix": "next lint --fix",
+    "lint:style": "stylelint --fix '**/*.scss'",
+    "lint:timing": "TIMING=1 next lint",
+    "postbuild": "next-sitemap",
+    "prettier": "prettier --write .",
+    "start": "next start",
+    "stylelint-check": "stylelint-config-prettier-scss-check",
+    "type-check": "tsc --noemit"
+  },
+  "version": "0.1.0"
+}

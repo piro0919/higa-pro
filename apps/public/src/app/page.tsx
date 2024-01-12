@@ -1,11 +1,11 @@
 import { MicroCMSListResponse } from "microcms-js-sdk";
 import Client, { ClientProps } from "./client";
-import client from "@/lib/client";
+import microcmsClient from "@/lib/microcmsClient";
 
 type GetNewsListData = MicroCMSListResponse<MicroCMS.News>;
 
 async function getNewsList(): Promise<GetNewsListData> {
-  const response = await client.getList<MicroCMS.News>({
+  const response = await microcmsClient.getList<MicroCMS.News>({
     customRequestInit: {
       next: {
         revalidate: process.env.VERCEL_ENV === "production" ? 60 * 60 : false,
@@ -23,7 +23,7 @@ async function getNewsList(): Promise<GetNewsListData> {
 type GetTalentListData = MicroCMSListResponse<MicroCMS.Talent>;
 
 async function getTalentList(): Promise<GetTalentListData> {
-  const response = await client.getList<MicroCMS.Talent>({
+  const response = await microcmsClient.getList<MicroCMS.Talent>({
     customRequestInit: {
       next: {
         revalidate: process.env.VERCEL_ENV === "production" ? 60 * 60 : false,

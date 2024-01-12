@@ -31,7 +31,7 @@ export default function App({
         <NewsBlock newsList={newsList} />
       </div>
       <div id="talent">
-        <TalentBlock talents={talents} />
+        <TalentBlock pathname="/" talents={talents} />
       </div>
       <div id="contact">
         <ContactBlock onSubmit={onSubmit} />
