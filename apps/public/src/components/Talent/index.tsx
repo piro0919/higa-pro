@@ -1,8 +1,8 @@
 "use client";
 import { usePathname } from "next/navigation";
 import { useMemo } from "react";
-import BlogEntryBlock, { BlogEntryBlockProps } from "../BlogEntryBlock";
-import BlogBlock, { BlogBlockProps } from "@/components/BlogBlock";
+import { BlogEntryBlockProps } from "../BlogEntryBlock";
+import { BlogBlockProps } from "@/components/BlogBlock";
 import TalentBlock, { TalentBlockProps } from "@/components/TalentBlock";
 import TalentTop, { TalentTopProps } from "@/components/TalentTop";
 
@@ -52,7 +52,7 @@ export default function Talent({
         url={url}
         width={width}
       />
-      <div id="blog">
+      {/* <div id="blog">
         {"blogList" in talentProps ? (
           <BlogBlock blogList={talentProps.blogList} />
         ) : (
@@ -62,7 +62,7 @@ export default function Talent({
             title={talentProps.title}
           />
         )}
-      </div>
+      </div> */}
       <div id="talent">
         <TalentBlock pathname={talentBlockPathname} talents={talents} />
       </div>
