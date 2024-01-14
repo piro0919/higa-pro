@@ -17,7 +17,7 @@
     "rehype-sanitize": "6.0.0",
     "ress": "5.0.2",
     "stytch": "10.2.0",
-    "usehooks-ts": "2.9.2",
+    "usehooks-ts": "2.9.4",
     "zustand": "4.4.7"
   },
   "devDependencies": {
