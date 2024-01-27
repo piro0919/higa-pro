@@ -5,7 +5,6 @@
     "@szhsin/react-menu": "4.1.0",
     "@tanstack/react-table": "8.11.6",
     "@uiw/react-md-editor": "4.0.3",
-    "contentful-management": "11.12.0",
     "dayjs": "1.11.10",
     "next": "14.0.4",
     "nextjs-toploader": "1.6.4",
@@ -25,7 +24,6 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "contentful-typescript-codegen": "3.4.0",
     "next-sitemap": "4.2.3",
     "sass": "1.69.7",
     "sass-mq": "6.0.0",
@@ -35,7 +33,6 @@
   "private": true,
   "scripts": {
     "build": "next build -p 4000",
-    "contentful-typescript-codegen": "contentful-typescript-codegen --namespace Contentful --output contentful.d.ts --localization",
     "dev": "next dev -p 4000",
     "lint": "next lint",
     "lint:fix": "next lint --fix",

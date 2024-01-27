@@ -1,7 +1,6 @@
-"use client";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import useMeasure from "react-use-measure";
 import { useCounter } from "usehooks-ts";
 import styles from "./style.module.scss";
@@ -17,10 +16,12 @@ type Talent = {
 };
 
 export type TalentsBlockProps = {
+  onIsLoaded?: () => void;
   talents: Talent[];
 };
 
 export default function TalentsBlock({
+  onIsLoaded,
   talents,
 }: TalentsBlockProps): JSX.Element {
   const { count, increment } = useCounter(0);
@@ -29,6 +30,23 @@ export default function TalentsBlock({
     [count, talents],
   );
   const [ref, { height: wrapperHeight }] = useMeasure();
+
+  useEffect(() => {
+    if (!isLoaded || !onIsLoaded) {
+      return;
+    }
+
+    const timeoutId = setTimeout(
+      () => {
+        onIsLoaded();
+      },
+      (talents.length * 0.1 + 0.25 + 1) * 1000,
+    );
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [isLoaded, onIsLoaded, talents.length]);
 
   return (
     <div className={styles.wrapper} ref={ref}>
@@ -56,7 +74,7 @@ export default function TalentsBlock({
                         className={styles.talentImageInner}
                         initial={{ transform: "translate(-200%, 0)" }}
                         transition={{
-                          delay: 0.1 * index,
+                          delay: 0.1 * index + 0.25,
                           duration: 1,
                           ease: "backOut",
                         }}

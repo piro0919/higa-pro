@@ -8,7 +8,7 @@ import TalentTop, { TalentTopProps } from "@/components/TalentTop";
 
 export type TalentProps = (
   | Pick<BlogBlockProps, "blogList">
-  | Pick<BlogEntryBlockProps, "content" | "createdAt" | "title">
+  | Pick<BlogEntryBlockProps, "createdAt" | "title">
 ) &
   Pick<TalentBlockProps, "talents"> &
   Pick<
@@ -28,7 +28,6 @@ export default function Talent({
   twitterUrl,
   url,
   width,
-  ...talentProps
 }: TalentProps): JSX.Element {
   const pathname = usePathname();
   const talentBlockPathname = useMemo<TalentBlockProps["pathname"]>(

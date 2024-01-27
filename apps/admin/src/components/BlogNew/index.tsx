@@ -13,10 +13,8 @@ export default function BlogNew(): JSX.Element {
   const headerHeight = useHeaderStore(({ height }) => height);
   const [value, setValue] = useLocalStorage("blog", "");
   const handleClick = useCallback<NonNullable<ButtonProps["onClick"]>>(() => {
-    console.log(value);
-
     setValue("");
-  }, [setValue, value]);
+  }, [setValue]);
 
   return (
     <div

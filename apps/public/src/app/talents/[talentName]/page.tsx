@@ -1,4 +1,3 @@
-import { Collection, EntryProps } from "contentful-management";
 import {
   MicroCMSContentId,
   MicroCMSDate,
@@ -7,7 +6,6 @@ import {
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Talent, { TalentProps } from "@/components/Talent";
-import contentfulEnvironment from "@/lib/contentfulEnvironment";
 import defaultMetadata from "@/lib/defaultMetadata";
 import microcmsClient from "@/lib/microcmsClient";
 
@@ -112,37 +110,6 @@ async function getTalentList(): Promise<GetTalentListData> {
   return response;
 }
 
-type GetBlogListData = Collection<
-  EntryProps<Contentful.IBlogFields>,
-  EntryProps<Contentful.IBlogFields>
->;
-
-async function getBlogList(): Promise<GetBlogListData> {
-  const entries = (await contentfulEnvironment.getEntries({
-    content_type: "blog",
-    select: "fields.title,sys.createdAt,sys.id",
-  })) as unknown as Collection<
-    EntryProps<Contentful.IBlogFields>,
-    EntryProps<Contentful.IBlogFields>
-  >;
-
-  return entries;
-}
-
-type GetBlogParams = {
-  id: string;
-};
-
-type GetBlogData = EntryProps<Contentful.IBlogFields>;
-
-async function getBlog({ id }: GetBlogParams): Promise<GetBlogData> {
-  const entry = (await contentfulEnvironment.getEntry(
-    id,
-  )) as unknown as EntryProps<Contentful.IBlogFields>;
-
-  return entry;
-}
-
 export default async function Page({
   params: { talentName },
   searchParams: { blogId },
@@ -171,50 +138,15 @@ export default async function Page({
     }),
   );
 
-  if (typeof blogId === "undefined") {
-    const { items } = await getBlogList();
-    const blogList = items.map(
-      ({ fields: { title }, sys: { createdAt, id } }) => ({
-        createdAt,
-        id,
-        title: title.ja || "",
-      }),
-    );
-
-    return (
-      <Talent
-        blogList={blogList}
-        height={height}
-        iriamUrl={iriamUrl}
-        name={name}
-        profile={profile}
-        talents={talents}
-        twitterUrl={twitterUrl}
-        url={url}
-        width={width}
-      />
-    );
-  }
-
-  const {
-    fields: { content, talentId, title },
-    sys: { createdAt },
-  } = await getBlog({ id: blogId });
-
-  if (!content.ja || talentName !== talentId.ja) {
-    notFound();
-  }
-
   return (
     <Talent
-      content={content.ja}
-      createdAt={createdAt}
+      createdAt=""
       height={height}
       iriamUrl={iriamUrl}
       name={name}
       profile={profile}
       talents={talents}
-      title={title.ja || ""}
+      title=""
       twitterUrl={twitterUrl}
       url={url}
       width={width}

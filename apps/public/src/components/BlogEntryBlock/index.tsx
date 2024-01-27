@@ -1,17 +1,13 @@
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { Document, INLINES } from "@contentful/rich-text-types";
+import dayjs from "dayjs";
 import styles from "./style.module.scss";
 import Article from "@/components/Article";
-import dayjs from "dayjs";
 
 export type BlogEntryBlockProps = {
-  content: Document;
   createdAt: string;
   title: string;
 };
 
 export default function BlogEntryBlock({
-  content,
   createdAt,
   title,
 }: BlogEntryBlockProps): JSX.Element {
@@ -26,18 +22,7 @@ export default function BlogEntryBlock({
             </div>
           </div>
           <hr className={styles.hr} />
-          <div className={styles.contentBlock}>
-            {documentToReactComponents(content, {
-              preserveWhitespace: true,
-              renderNode: {
-                [INLINES.HYPERLINK]: ({ data: { uri }, content }) => (
-                  <a target="_blank" href={uri}>
-                    {(content[0] as any).value}
-                  </a>
-                ),
-              },
-            })}
-          </div>
+          <div className={styles.contentBlock}>aaa</div>
         </div>
       </Article>
     </div>

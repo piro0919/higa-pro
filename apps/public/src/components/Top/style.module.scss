@@ -8,6 +8,41 @@
   position: absolute;
 }
 
+.talentsBlockWrapper {
+  inset: 0;
+  position: absolute;
+}
+
+.rankingBlockWrapper {
+  /* stylelint-disable-next-line csstree/validator */
+  background: rgba(#fff, 0.75);
+  display: flex;
+  height: 100%;
+  position: relative;
+}
+
+@keyframes grid-animation {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: -25px -25px;
+  }
+}
+
+.spacer {
+  animation: grid-animation 1s infinite linear;
+  backdrop-filter: blur(1px);
+  /* stylelint-disable-next-line csstree/validator */
+  background-color: rgba(#fff, 0.125);
+  background-repeat: repeat;
+  /* stylelint-disable-next-line csstree/validator */
+  color: rgba(#fff, 0.5);
+  flex-grow: 1;
+  position: relative;
+}
+
 .inner2 {
   align-items: center;
   /* stylelint-disable-next-line csstree/validator */
@@ -22,7 +57,6 @@
 }
 
 .imageBlockWrapper {
-  backdrop-filter: blur(1px);
   border-radius: 50dvmax;
 }
 

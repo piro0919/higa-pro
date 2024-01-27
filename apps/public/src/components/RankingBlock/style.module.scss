@@ -1,0 +1,161 @@
+.wrapper {
+  border: 2px solid #fff;
+  display: grid;
+  grid-template: "ranking1 ranking2 ranking2" 2fr "ranking1 ranking3 ranking4" 1fr "ranking1 ranking3 ranking5" 1fr / 2fr 1fr 1fr;
+  height: 100%;
+  position: relative;
+  /* stylelint-disable-next-line csstree/validator */
+  width: min(100%, 1280px);
+}
+
+.rankingBlock {
+  border: 2px solid #fff;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.rankingBlock[data-ranking="1"] {
+  grid-area: ranking1;
+}
+
+.rankingBlock[data-ranking="2"] {
+  grid-area: ranking2;
+}
+
+.rankingBlock[data-ranking="3"] {
+  grid-area: ranking3;
+}
+
+.rankingBlock[data-ranking="4"] {
+  grid-area: ranking4;
+}
+
+.rankingBlock[data-ranking="5"] {
+  grid-area: ranking5;
+}
+
+@keyframes grid-animation {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: -25px -25px;
+  }
+}
+
+.rankingBackground {
+  animation: grid-animation 1s infinite linear;
+  backdrop-filter: blur(1px);
+  /* stylelint-disable-next-line csstree/validator */
+  background-color: rgba(#000, 0.125);
+  background-repeat: repeat;
+  /* stylelint-disable-next-line csstree/validator */
+  color: rgba(#fff, 0.5);
+  position: absolute;
+  @include mq.mq($until: desktop) {
+    border-radius: 0 12px;
+    inset: 12px;
+  }
+  @include mq.mq($from: desktop) {
+    border-radius: 0 24px;
+    inset: 24px;
+  }
+}
+
+.imageWrapper {
+  height: 200%;
+  position: absolute;
+  width: 200%;
+}
+
+.image {
+  object-position: top;
+  @include mq.mq($until: desktop) {
+    filter: drop-shadow(4px 4px rgba(#063f5c, 0.75));
+  }
+  @include mq.mq($from: desktop) {
+    filter: drop-shadow(8px 8px rgba(#063f5c, 0.75));
+  }
+  @media (orientation: landscape) {
+    object-fit: contain;
+  }
+  @media (orientation: portrait) {
+    object-fit: cover;
+  }
+}
+
+.detailBlock {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  position: absolute;
+}
+
+.rankImage {
+  aspect-ratio: 1 / 1;
+  filter: drop-shadow(4px 4px rgba(#063f5c, 0.5));
+  height: 50%;
+  margin: 8px;
+  position: absolute;
+  width: 50%;
+  @include mq.mq($until: tablet) {
+    bottom: 0;
+    left: 0;
+  }
+  @include mq.mq($from: tablet, $until: desktop) {
+    bottom: 12px;
+    left: 12px;
+  }
+  @include mq.mq($from: desktop) {
+    bottom: 24px;
+    left: 24px;
+  }
+}
+
+.rankImage img {
+  object-fit: contain;
+  object-position: bottom left;
+}
+
+.nameBlock {
+  color: #fff;
+  filter: drop-shadow(4px 4px rgba(#063f5c, 0.5));
+  font-family: arial, sans-serif;
+  font-weight: 900;
+  padding: 8px;
+  position: absolute;
+  writing-mode: vertical-rl;
+  @include mq.mq($until: tablet) {
+    right: 0;
+    top: 0;
+  }
+  @include mq.mq($from: tablet, $until: desktop) {
+    right: 12px;
+    top: 12px;
+  }
+  @include mq.mq($from: desktop) {
+    right: 24px;
+    top: 24px;
+  }
+}
+
+.rankingBlock[data-ranking="1"] .nameBlock {
+  font-size: 4.8rem;
+}
+
+.rankingBlock[data-ranking="2"] .nameBlock {
+  font-size: 3.6rem;
+}
+
+.rankingBlock[data-ranking="3"] .nameBlock {
+  font-size: 2.4rem;
+}
+
+.rankingBlock[data-ranking="4"] .nameBlock,
+.rankingBlock[data-ranking="5"] .nameBlock {
+  font-size: 1.8rem;
+}
