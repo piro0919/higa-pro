@@ -1,6 +1,5 @@
 import dayjs from "dayjs";
 import Link from "next/link";
-import { useParams } from "next/navigation";
 import { Fragment } from "react";
 import styles from "./style.module.scss";
 import Article from "@/components/Article";
@@ -13,11 +12,13 @@ type Blog = {
 
 export type BlogBlockProps = {
   blogList: Blog[];
+  talentId: string;
 };
 
-export default function BlogBlock({ blogList }: BlogBlockProps): JSX.Element {
-  const { talentName } = useParams();
-
+export default function BlogBlock({
+  blogList,
+  talentId,
+}: BlogBlockProps): JSX.Element {
   return (
     <div className={`${styles.wrapper} pattern-horizontal-stripes-lg`}>
       <Article heading="BLOG">
@@ -28,9 +29,7 @@ export default function BlogBlock({ blogList }: BlogBlockProps): JSX.Element {
                 {index > 0 ? <hr className={styles.hr} /> : null}
                 <Link
                   className={styles.blog}
-                  href={`/talents/${
-                    typeof talentName === "string" ? talentName : ""
-                  }/blog/${id}#blog`}
+                  href={`/talents/${talentId}/blog/${id}#blog`}
                 >
                   <div className={styles.dateBlock}>
                     {dayjs(createdAt).format("YYYY.M.D")}

@@ -1,5 +1,5 @@
-import BlogNew from "@/components/BlogNew";
+import Client from "./client";
 
 export default function Page(): JSX.Element {
-  return <BlogNew />;
+  return <Client />;
 }

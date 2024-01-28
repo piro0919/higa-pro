@@ -1,4 +1,3 @@
-"use client";
 import NoSSR from "@mpth/react-no-ssr";
 import MDEditor from "@uiw/react-md-editor";
 import { useCallback } from "react";
@@ -9,12 +8,16 @@ import Button, { ButtonProps } from "../Button";
 import styles from "./style.module.scss";
 import useHeaderStore from "@/stores/useHeaderStore";
 
-export default function BlogNew(): JSX.Element {
+export type BlogNewProps = {
+  onSave: (value: string) => void;
+};
+
+export default function BlogNew({ onSave }: BlogNewProps): JSX.Element {
   const headerHeight = useHeaderStore(({ height }) => height);
   const [value, setValue] = useLocalStorage("blog", "");
   const handleClick = useCallback<NonNullable<ButtonProps["onClick"]>>(() => {
-    setValue("");
-  }, [setValue]);
+    onSave(value);
+  }, [onSave, value]);
 
   return (
     <div

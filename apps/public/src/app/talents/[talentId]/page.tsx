@@ -10,27 +10,18 @@ import defaultMetadata from "@/lib/defaultMetadata";
 import microcmsClient from "@/lib/microcmsClient";
 
 type GetTalentParams = {
-  furigana: string;
+  talentId: string;
 };
 
 type GetTalentData = MicroCMS.Talent & MicroCMSContentId & MicroCMSDate;
 
 async function getTalent({
-  furigana,
+  talentId,
 }: GetTalentParams): Promise<GetTalentData> {
-  const [contentId] = await microcmsClient.getAllContentIds({
-    customRequestInit: {
-      next: {
-        revalidate: process.env.VERCEL_ENV === "production" ? 60 * 60 : false,
-      },
-    },
-    endpoint: "talents",
-    filters: `furigana[equals]${furigana}`,
-  });
   const response = await microcmsClient.get<
     MicroCMS.Talent & MicroCMSContentId & MicroCMSDate
   >({
-    contentId,
+    contentId: talentId,
     customRequestInit: {
       next: {
         revalidate: process.env.VERCEL_ENV === "production" ? 60 * 60 : false,
@@ -43,26 +34,17 @@ async function getTalent({
 }
 
 export type PageProps = {
-  params: { talentName: string };
+  params: { talentId: string };
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
 export async function generateMetadata({
-  params: { talentName },
+  params: { talentId },
 }: PageProps): Promise<Metadata> {
-  const [contentId] = await microcmsClient.getAllContentIds({
-    customRequestInit: {
-      next: {
-        revalidate: process.env.VERCEL_ENV === "production" ? 60 * 60 : false,
-      },
-    },
-    endpoint: "talents",
-    filters: `furigana[equals]${talentName}`,
-  });
   const { name, profile } = await microcmsClient.get<
     MicroCMS.Talent & MicroCMSContentId & MicroCMSDate
   >({
-    contentId,
+    contentId: talentId,
     customRequestInit: {
       next: {
         revalidate: process.env.VERCEL_ENV === "production" ? 60 * 60 : false,
@@ -73,7 +55,7 @@ export async function generateMetadata({
 
   return {
     alternates: {
-      canonical: `/talents/${talentName}`,
+      canonical: `/talents/${talentId}`,
     },
     description: profile,
     openGraph: {
@@ -81,7 +63,7 @@ export async function generateMetadata({
       description: profile,
       title: name,
       type: "article",
-      url: `/talents/${talentName}`,
+      url: `/talents/${talentId}`,
     },
     title: name,
     twitter: {
@@ -111,11 +93,11 @@ async function getTalentList(): Promise<GetTalentListData> {
 }
 
 export default async function Page({
-  params: { talentName },
+  params: { talentId },
   searchParams: { blogId },
 }: PageProps): Promise<JSX.Element> {
   const { images, iriamUrl, name, profile, twitterUrl } = await getTalent({
-    furigana: talentName,
+    talentId,
   });
 
   if (

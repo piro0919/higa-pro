@@ -1,6 +1,5 @@
 "use client";
 import arraySort from "array-sort";
-import capitalize from "capitalize";
 import dayjs from "dayjs";
 import { motion } from "framer-motion";
 import { Jost } from "next/font/google";
@@ -46,7 +45,7 @@ export default function TalentBlock({
       ).sort(),
     [talentBlockPropTalents],
   );
-  const { talentName } = useParams();
+  const { talentId } = useParams();
   const searchParams = useSearchParams();
   const activeDebut = useMemo(() => {
     const debut = searchParams.get("debut");
@@ -55,10 +54,8 @@ export default function TalentBlock({
       return debut;
     }
 
-    if (typeof talentName === "string") {
-      const talent = talentBlockPropTalents.find(
-        ({ furigana }) => talentName === furigana,
-      );
+    if (typeof talentId === "string") {
+      const talent = talentBlockPropTalents.find(({ id }) => talentId === id);
 
       if (talent) {
         const { debut } = talent;
@@ -68,7 +65,7 @@ export default function TalentBlock({
     }
 
     return debutList[0];
-  }, [debutList, searchParams, talentBlockPropTalents, talentName]);
+  }, [debutList, searchParams, talentBlockPropTalents, talentId]);
   const talents = useMemo(
     () =>
       arraySort(
@@ -185,10 +182,7 @@ export default function TalentBlock({
                         ease: "easeOut",
                       }}
                     >
-                      {furigana
-                        .split("-")
-                        .map((v) => capitalize(v))
-                        .join(" ")}
+                      {furigana}
                     </motion.div>
                   </motion.div>
                 </motion.div>
@@ -197,7 +191,7 @@ export default function TalentBlock({
               return (
                 <li key={id}>
                   {image ? (
-                    <Link href={`/talents/${furigana}`}>{children}</Link>
+                    <Link href={`/talents/${id}`}>{children}</Link>
                   ) : (
                     children
                   )}
