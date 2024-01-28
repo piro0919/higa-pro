@@ -49,16 +49,43 @@ export default async function Page(): Promise<JSX.Element> {
     }),
   );
   const { contents: talentListContents } = await getTalentList();
-  const talents: ClientProps["talents"] = talentListContents.map(
-    ({ debut, furigana, id, images, name, rank }) => ({
+  const talents: ClientProps["talents"] = talentListContents
+    .filter(({ type }) => type.includes("タレント"))
+    .map(({ debut, furigana, id, images, name, rank }) => ({
       debut,
       furigana,
       id,
       image: images?.at(0),
       name,
       rank,
-    }),
-  );
+    }));
+  const managers: ClientProps["managers"] = talentListContents
+    .filter(({ type }) => type.includes("マネージャー"))
+    .map(({ debut, furigana, id, images, name, rank }) => ({
+      debut,
+      furigana,
+      id,
+      image: images?.at(0),
+      name,
+      rank,
+    }));
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  const topTalents: ClientProps["topTalents"] = talentListContents
+    .filter(({ images }) => images.length > 0)
+    .map(({ id, images, name, rank }) => ({
+      id,
+      image: images?.at(0),
+      name,
+      rank,
+    }));
 
-  return <Client newsList={newsList} talents={talents} />;
+  return (
+    <Client
+      managers={managers}
+      newsList={newsList}
+      talents={talents}
+      topTalents={topTalents}
+    />
+  );
 }

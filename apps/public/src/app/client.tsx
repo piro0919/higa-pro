@@ -4,11 +4,16 @@ import { useCallback } from "react";
 import { toast } from "react-toastify";
 import App, { AppProps } from "@/components/App";
 
-export type ClientProps = Pick<AppProps, "newsList" | "talents">;
+export type ClientProps = Pick<
+  AppProps,
+  "managers" | "newsList" | "talents" | "topTalents"
+>;
 
 export default function Client({
+  managers,
   newsList,
   talents,
+  topTalents,
 }: ClientProps): JSX.Element {
   const handleSubmit = useCallback<AppProps["onSubmit"]>(async (values) => {
     await toast.promise(axios.post("/email", values), {
@@ -18,5 +23,13 @@ export default function Client({
     });
   }, []);
 
-  return <App newsList={newsList} onSubmit={handleSubmit} talents={talents} />;
+  return (
+    <App
+      managers={managers}
+      newsList={newsList}
+      onSubmit={handleSubmit}
+      talents={talents}
+      topTalents={topTalents}
+    />
+  );
 }

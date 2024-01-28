@@ -14,7 +14,7 @@ import Article from "@/components/Article";
 
 const jost = Jost({ subsets: ["latin"], weight: "700" });
 
-type Talent = {
+type Manager = {
   debut: string;
   furigana: string;
   id: string;
@@ -25,57 +25,59 @@ type Talent = {
   rank?: 1 | 2 | 3 | 4 | 5;
 };
 
-export type TalentBlockProps = {
+export type ManagerBlockProps = {
+  managers: Manager[];
   pathname: string;
-  talents: Talent[];
 };
 
-export default function TalentBlock({
+export default function ManagerBlock({
+  managers: managerBlockPropManagers,
   pathname,
-  talents: talentBlockPropTalents,
-}: TalentBlockProps): JSX.Element {
+}: ManagerBlockProps): JSX.Element {
   const debutList = useMemo(
     () =>
       Array.from(
         new Set(
-          talentBlockPropTalents.map(({ debut }) =>
+          managerBlockPropManagers.map(({ debut }) =>
             dayjs(debut).format("YYYY-MM"),
           ),
         ),
       ).sort(),
-    [talentBlockPropTalents],
+    [managerBlockPropManagers],
   );
-  const { talentId } = useParams();
+  const { managerId } = useParams();
   const searchParams = useSearchParams();
   const activeDebut = useMemo(() => {
     const debut = searchParams.get("debut");
     const type = searchParams.get("type");
 
-    if (typeof debut === "string" && type === "talent") {
+    if (typeof debut === "string" && type === "manager") {
       return debut;
     }
 
-    if (typeof talentId === "string") {
-      const talent = talentBlockPropTalents.find(({ id }) => talentId === id);
+    if (typeof managerId === "string") {
+      const manager = managerBlockPropManagers.find(
+        ({ id }) => managerId === id,
+      );
 
-      if (talent) {
-        const { debut } = talent;
+      if (manager) {
+        const { debut } = manager;
 
         return dayjs(debut).format("YYYY-MM");
       }
     }
 
     return debutList[0];
-  }, [debutList, searchParams, talentBlockPropTalents, talentId]);
-  const talents = useMemo(
+  }, [searchParams, managerId, debutList, managerBlockPropManagers]);
+  const managers = useMemo(
     () =>
       arraySort(
-        talentBlockPropTalents.filter(
+        managerBlockPropManagers.filter(
           ({ debut }) => dayjs(debut).format("YYYY-MM") === activeDebut,
         ),
         ["image", "furigana"],
       ),
-    [activeDebut, talentBlockPropTalents],
+    [activeDebut, managerBlockPropManagers],
   );
   const { inView, ref } = useInView({
     rootMargin: "-25% 0px -25% 0px",
@@ -83,8 +85,8 @@ export default function TalentBlock({
   });
 
   return (
-    <div className={`${styles.wrapper} pattern-zigzag-lg`} ref={ref}>
-      <Article heading="TALENT">
+    <div className={`${styles.wrapper} pattern-vertical-stripes-xl`} ref={ref}>
+      <Article heading="MANAGER">
         <div className={styles.articleInner}>
           <div className={styles.linksWrapper}>
             {debutList.map((debut) => (
@@ -95,9 +97,9 @@ export default function TalentBlock({
                 href={queryString.stringifyUrl({
                   query: {
                     debut,
-                    type: "talent",
+                    type: "manager",
                   },
-                  url: `${pathname}#talent`,
+                  url: `${pathname}#manager`,
                 })}
                 key={debut}
               >
@@ -108,7 +110,7 @@ export default function TalentBlock({
             ))}
           </div>
           <ul className={styles.list}>
-            {talents.map(({ furigana, id, image, name }, index) => {
+            {managers.map(({ furigana, id, image, name }, index) => {
               const children = (
                 <motion.div
                   animate={{
@@ -193,7 +195,7 @@ export default function TalentBlock({
               return (
                 <li key={id}>
                   {image ? (
-                    <Link href={`/talents/${id}`}>{children}</Link>
+                    <Link href={`/managers/${id}`}>{children}</Link>
                   ) : (
                     children
                   )}

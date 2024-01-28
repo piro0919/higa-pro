@@ -14,103 +14,53 @@ export default function Header(): JSX.Element {
     <header className={`${styles.header} pattern-cross-dots-lg`}>
       <nav>
         <ul className={styles.list}>
-          <li>
-            {pathname === "/" ? (
-              <Link
-                activeClass={styles.active}
-                className={`${styles.link} ${jost.className}`}
-                hashSpy={true}
-                spy={true}
-                to="top"
-              >
-                TOP
-              </Link>
-            ) : (
-              <NextLink className={`${styles.link} ${jost.className}`} href="/">
-                TOP
-              </NextLink>
-            )}
-          </li>
-          <li>
-            {pathname === "/" ? (
-              <Link
-                activeClass={styles.active}
-                className={`${styles.link} ${jost.className}`}
-                hashSpy={true}
-                spy={true}
-                to="about"
-              >
-                ABOUT
-              </Link>
-            ) : (
-              <NextLink
-                className={`${styles.link} ${jost.className}`}
-                href="/#about"
-              >
-                ABOUT
-              </NextLink>
-            )}
-          </li>
-          <li>
-            {pathname === "/" ? (
-              <Link
-                activeClass={styles.active}
-                className={`${styles.link} ${jost.className}`}
-                hashSpy={true}
-                spy={true}
-                to="news"
-              >
-                NEWS
-              </Link>
-            ) : (
-              <NextLink
-                className={`${styles.link} ${jost.className}`}
-                href="/#news"
-              >
-                NEWS
-              </NextLink>
-            )}
-          </li>
-          <li>
-            {pathname === "/" ? (
-              <Link
-                activeClass={styles.active}
-                className={`${styles.link} ${jost.className}`}
-                hashSpy={true}
-                spy={true}
-                to="talent"
-              >
-                TALENT
-              </Link>
-            ) : (
-              <NextLink
-                className={`${styles.link} ${jost.className}`}
-                href="/#talent"
-              >
-                TALENT
-              </NextLink>
-            )}
-          </li>
-          <li>
-            {pathname === "/" ? (
-              <Link
-                activeClass={styles.active}
-                className={`${styles.link} ${jost.className}`}
-                hashSpy={true}
-                spy={true}
-                to="contact"
-              >
-                CONTACT
-              </Link>
-            ) : (
-              <NextLink
-                className={`${styles.link} ${jost.className}`}
-                href="/#contact"
-              >
-                CONTACT
-              </NextLink>
-            )}
-          </li>
+          {[
+            {
+              text: "TOP",
+              to: "top",
+            },
+            {
+              text: "ABOUT",
+              to: "about",
+            },
+            {
+              text: "NEWS",
+              to: "news",
+            },
+            {
+              text: "TALENT",
+              to: "talent",
+            },
+            {
+              text: "MANAGER",
+              to: "manager",
+            },
+            {
+              text: "CONTACT",
+              to: "contact",
+            },
+          ].map(({ text, to }) => (
+            <li key={to}>
+              {pathname === "/" ? (
+                <Link
+                  activeClass={styles.active}
+                  className={`${styles.link} ${jost.className}`}
+                  hashSpy={true}
+                  spy={true}
+                  to={to}
+                >
+                  {text}
+                </Link>
+              ) : (
+                <NextLink
+                  className={`${styles.link} ${jost.className}`}
+                  href={`/#${to}`}
+                >
+                  {text}
+                </NextLink>
+              )}
+            </li>
+          ))}
         </ul>
       </nav>
       <a href="https://twitter.com/HIGA_pro_0608" target="_blank">

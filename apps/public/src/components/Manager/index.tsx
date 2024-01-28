@@ -3,36 +3,42 @@ import { usePathname } from "next/navigation";
 import { useMemo } from "react";
 import { BlogEntryBlockProps } from "../BlogEntryBlock";
 import { BlogBlockProps } from "@/components/BlogBlock";
-import TalentBlock, { TalentBlockProps } from "@/components/TalentBlock";
+import ManagerBlock, { ManagerBlockProps } from "@/components/ManagerBlock";
 import TalentTop, { TalentTopProps } from "@/components/TalentTop";
 
-export type TalentProps = (
+export type ManagerProps = (
   | Pick<BlogBlockProps, "blogList">
   | Pick<BlogEntryBlockProps, "createdAt" | "title">
 ) &
-  Pick<TalentBlockProps, "talents"> &
+  Pick<ManagerBlockProps, "managers"> &
   Pick<
     TalentTopProps,
-    "height" | "name" | "profile" | "url" | "width" | "iriamUrl" | "twitterUrl"
+    | "height"
+    | "iriamUrl"
+    | "name"
+    | "profile"
+    | "talents"
+    | "twitterUrl"
+    | "url"
+    | "width"
   > & {
     blogId?: string;
-    topTalents: TalentTopProps["talents"];
   };
 
-export default function Talent({
+export default function Manager({
   blogId,
   height,
   iriamUrl,
+  managers,
   name,
   profile,
   talents,
-  topTalents,
   twitterUrl,
   url,
   width,
-}: TalentProps): JSX.Element {
+}: ManagerProps): JSX.Element {
   const pathname = usePathname();
-  const talentBlockPathname = useMemo<TalentBlockProps["pathname"]>(
+  const talentBlockPathname = useMemo<ManagerBlockProps["pathname"]>(
     () => (blogId ? `${pathname}/blog/${blogId}` : pathname),
     [blogId, pathname],
   );
@@ -44,7 +50,7 @@ export default function Talent({
         iriamUrl={iriamUrl}
         name={name}
         profile={profile}
-        talents={topTalents}
+        talents={talents}
         twitterUrl={twitterUrl}
         url={url}
         width={width}
@@ -60,8 +66,8 @@ export default function Talent({
           />
         )}
       </div> */}
-      <div id="talent">
-        <TalentBlock pathname={talentBlockPathname} talents={talents} />
+      <div id="manager">
+        <ManagerBlock managers={managers} pathname={talentBlockPathname} />
       </div>
     </>
   );

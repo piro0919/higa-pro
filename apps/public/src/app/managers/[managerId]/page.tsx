@@ -5,23 +5,23 @@ import {
 } from "microcms-js-sdk";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Talent, { TalentProps } from "@/components/Talent";
+import Manager, { ManagerProps } from "@/components/Manager";
 import defaultMetadata from "@/lib/defaultMetadata";
 import microcmsClient from "@/lib/microcmsClient";
 
-type GetTalentParams = {
-  talentId: string;
+type GetManagerParams = {
+  managerId: string;
 };
 
-type GetTalentData = MicroCMS.Talent & MicroCMSContentId & MicroCMSDate;
+type GetManagerData = MicroCMS.Talent & MicroCMSContentId & MicroCMSDate;
 
 async function getTalent({
-  talentId,
-}: GetTalentParams): Promise<GetTalentData> {
+  managerId,
+}: GetManagerParams): Promise<GetManagerData> {
   const response = await microcmsClient.get<
     MicroCMS.Talent & MicroCMSContentId & MicroCMSDate
   >({
-    contentId: talentId,
+    contentId: managerId,
     customRequestInit: {
       next: {
         revalidate: process.env.VERCEL_ENV === "production" ? 60 * 60 : false,
@@ -34,17 +34,17 @@ async function getTalent({
 }
 
 export type PageProps = {
-  params: { talentId: string };
+  params: { managerId: string };
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
 export async function generateMetadata({
-  params: { talentId },
+  params: { managerId },
 }: PageProps): Promise<Metadata> {
   const { name, profile } = await microcmsClient.get<
     MicroCMS.Talent & MicroCMSContentId & MicroCMSDate
   >({
-    contentId: talentId,
+    contentId: managerId,
     customRequestInit: {
       next: {
         revalidate: process.env.VERCEL_ENV === "production" ? 60 * 60 : false,
@@ -55,7 +55,7 @@ export async function generateMetadata({
 
   return {
     alternates: {
-      canonical: `/talents/${talentId}`,
+      canonical: `/managers/${managerId}`,
     },
     description: profile,
     openGraph: {
@@ -63,7 +63,7 @@ export async function generateMetadata({
       description: profile,
       title: name,
       type: "article",
-      url: `/talents/${talentId}`,
+      url: `/managers/${managerId}`,
     },
     title: name,
     twitter: {
@@ -74,9 +74,9 @@ export async function generateMetadata({
   };
 }
 
-type GetTalentListData = MicroCMSListResponse<MicroCMS.Talent>;
+type GetManagerListData = MicroCMSListResponse<MicroCMS.Talent>;
 
-async function getTalentList(): Promise<GetTalentListData> {
+async function getManagerList(): Promise<GetManagerListData> {
   const response = await microcmsClient.getList<MicroCMS.Talent>({
     customRequestInit: {
       next: {
@@ -93,11 +93,11 @@ async function getTalentList(): Promise<GetTalentListData> {
 }
 
 export default async function Page({
-  params: { talentId },
+  params: { managerId },
   searchParams: { blogId },
 }: PageProps): Promise<JSX.Element> {
   const { images, iriamUrl, name, profile, twitterUrl } = await getTalent({
-    talentId,
+    managerId,
   });
 
   if (
@@ -108,9 +108,9 @@ export default async function Page({
   }
 
   const { height, url, width } = images[0];
-  const { contents: talentListContents } = await getTalentList();
-  const talents: TalentProps["talents"] = talentListContents
-    .filter(({ type }) => type.includes("タレント"))
+  const { contents: talentListContents } = await getManagerList();
+  const managers: ManagerProps["managers"] = talentListContents
+    .filter(({ type }) => type.includes("マネージャー"))
     .map(({ debut, furigana, id, images, name, rank }) => ({
       debut,
       furigana,
@@ -121,7 +121,7 @@ export default async function Page({
     }));
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
-  const topTalents: TalentProps["topTalents"] = talentListContents
+  const talents: ManagerProps["talents"] = talentListContents
     .filter(({ images }) => images.length > 0)
     .map(({ debut, furigana, id, images, name, rank }) => ({
       debut,
@@ -133,15 +133,15 @@ export default async function Page({
     }));
 
   return (
-    <Talent
+    <Manager
       createdAt=""
       height={height}
       iriamUrl={iriamUrl}
+      managers={managers}
       name={name}
       profile={profile}
       talents={talents}
       title=""
-      topTalents={topTalents}
       twitterUrl={twitterUrl}
       url={url}
       width={width}
