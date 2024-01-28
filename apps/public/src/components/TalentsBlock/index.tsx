@@ -40,7 +40,7 @@ export default function TalentsBlock({
       () => {
         onIsLoaded();
       },
-      (talents.length * 0.1 + 0.25 + 1) * 1000,
+      (talents.length * 0.1 + 0.5) * 1000,
     );
 
     return () => {
@@ -74,7 +74,7 @@ export default function TalentsBlock({
                         className={styles.talentImageInner}
                         initial={{ transform: "translate(-200%, 0)" }}
                         transition={{
-                          delay: 0.1 * index + 0.25,
+                          delay: 0.1 * index + 0.5,
                           duration: 1,
                           ease: "backOut",
                         }}

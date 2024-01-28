@@ -87,14 +87,6 @@
   }
 }
 
-.detailBlock {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  position: absolute;
-}
-
 .rankImage {
   aspect-ratio: 1 / 1;
   filter: drop-shadow(4px 4px rgba(#063f5c, 0.5));
