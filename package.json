@@ -53,8 +53,5 @@
   "version": "0.1.0",
   "workspaces": [
     "apps/*"
-  ],
-  "dependencies": {
-    "@mpth/react-no-ssr": "1.0.1"
-  }
+  ]
 }

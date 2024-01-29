@@ -1,4 +1,3 @@
-"use client";
 import { useStytch } from "@stytch/nextjs";
 import {
   Menu,
@@ -12,7 +11,11 @@ import { TbGridDots } from "react-icons/tb";
 import Spacer from "react-spacer";
 import styles from "./style.module.scss";
 
-export default function Header(): JSX.Element {
+export type HeaderProps = {
+  deleteTalentId: () => Promise<void>;
+};
+
+export default function Header({ deleteTalentId }: HeaderProps): JSX.Element {
   const stytch = useStytch();
   const router = useRouter();
 
@@ -48,15 +51,17 @@ export default function Header(): JSX.Element {
         </SubMenu>
         <MenuItem
           onClick={(): void => {
-            router.push("/user");
+            router.push("/profile/edit");
           }}
         >
-          ユーザー
+          プロフィール
         </MenuItem>
         <MenuDivider />
         <MenuItem
           onClick={async (): Promise<void> => {
             await stytch.session.revoke();
+
+            await deleteTalentId();
 
             router.push("/login");
           }}

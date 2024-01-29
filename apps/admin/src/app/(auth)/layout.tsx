@@ -2,6 +2,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { ReactNode } from "react";
 import { Client, envs } from "stytch";
+import { deleteTalentId } from "./actions";
 import AuthLayout from "@/components/AuthLayout";
 
 export type LayoutProps = {
@@ -13,8 +14,9 @@ export default async function Layout({
 }: LayoutProps): Promise<JSX.Element> {
   const cookieStore = cookies();
   const sessionJWT = cookieStore.get("stytch_session_jwt");
+  const talentId = cookieStore.get("talentId");
 
-  if (!sessionJWT) {
+  if (!sessionJWT || typeof talentId?.value !== "string") {
     redirect("/login");
   }
 
@@ -32,5 +34,9 @@ export default async function Layout({
     redirect("/login");
   }
 
-  return <AuthLayout>{children}</AuthLayout>;
+  return (
+    <AuthLayout deleteTalentId={deleteTalentId} talentId={talentId.value}>
+      {children}
+    </AuthLayout>
+  );
 }

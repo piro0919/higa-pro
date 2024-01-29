@@ -1,11 +1,20 @@
 "use client";
+import { marked } from "marked";
 import { useCallback } from "react";
-import BlogNew, { BlogNewProps } from "@/components/BlogNew";
+import { createBlog } from "./actions";
+import { BlogEditProps } from "@/components/BlogEdit";
+import BlogNew from "@/components/BlogNew";
 
 export default function Client(): JSX.Element {
-  const handleSave = useCallback<BlogNewProps["onSave"]>((value) => {
-    console.log(value);
-  }, []);
+  const handleSubmit = useCallback<BlogEditProps["onSubmit"]>(
+    async ({ content, title }) => {
+      await createBlog({
+        content: await marked.parse(content),
+        title,
+      });
+    },
+    [],
+  );
 
-  return <BlogNew onSave={handleSave} />;
+  return <BlogNew onSubmit={handleSubmit} />;
 }

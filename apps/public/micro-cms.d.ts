@@ -1,4 +1,10 @@
 declare namespace MicroCMS {
+  type Blog = {
+    content: string;
+    talentId: string;
+    title: string;
+  };
+
   type Image = {
     height: number;
     url: string;
@@ -8,7 +14,7 @@ declare namespace MicroCMS {
   type Talent = {
     debut: string;
     furigana: string;
-    images: Image[];
+    images?: Image[];
     iriamUrl: string;
     name: string;
     profile: string;

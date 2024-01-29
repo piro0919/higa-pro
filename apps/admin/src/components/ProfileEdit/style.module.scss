@@ -1,0 +1,10 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 12px;
+}
+
+.inner {
+  /* stylelint-disable-next-line csstree/validator */
+  width: min(100%, 1280px);
+}

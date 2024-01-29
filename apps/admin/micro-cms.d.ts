@@ -1,6 +1,7 @@
 declare namespace MicroCMS {
   type Blog = {
     content: string;
+    talentId: string;
     title: string;
   };
 
@@ -18,6 +19,7 @@ declare namespace MicroCMS {
     name: string;
     profile: string;
     rank?: 1 | 2 | 3 | 4 | 5;
+    type: string[];
     twitterUrl: string;
   };
 

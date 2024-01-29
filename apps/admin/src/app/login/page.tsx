@@ -2,6 +2,7 @@
 import { useStytch, useStytchUser } from "@stytch/nextjs";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
+import { setTalentId } from "./actions";
 import Login from "@/components/Login";
 
 export default function Page(): JSX.Element {
@@ -47,11 +48,26 @@ export default function Page(): JSX.Element {
   }, [isInitialized, router, searchParams, stytch, user]);
 
   useEffect(() => {
-    if (!isInitialized || !user) {
-      return;
-    }
+    const callback = async (): Promise<void> => {
+      if (!isInitialized || !user) {
+        return;
+      }
 
-    router.replace("/");
+      const {
+        trusted_metadata: { talentId },
+      } = user;
+
+      if (typeof talentId !== "string") {
+        return;
+      }
+
+      await setTalentId(talentId);
+
+      router.replace("/");
+    };
+
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    callback();
   }, [user, isInitialized, router]);
 
   return <Login />;

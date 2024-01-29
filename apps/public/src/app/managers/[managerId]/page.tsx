@@ -122,7 +122,7 @@ export default async function Page({
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   const talents: ManagerProps["talents"] = talentListContents
-    .filter(({ images }) => images.length > 0)
+    .filter(({ images }) => Array.isArray(images) && images.length > 0)
     .map(({ debut, furigana, id, images, name, rank }) => ({
       debut,
       furigana,

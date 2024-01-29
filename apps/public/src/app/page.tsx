@@ -72,7 +72,7 @@ export default async function Page(): Promise<JSX.Element> {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   const topTalents: ClientProps["topTalents"] = talentListContents
-    .filter(({ images }) => images.length > 0)
+    .filter(({ images }) => Array.isArray(images) && images.length > 0)
     .map(({ id, images, name, rank }) => ({
       id,
       image: images?.at(0),

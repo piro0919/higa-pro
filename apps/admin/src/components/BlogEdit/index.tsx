@@ -1,9 +1,9 @@
+"use client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import dynamic from "next/dynamic";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import Spacer from "react-spacer";
 import rehypeSanitize from "rehype-sanitize";
-import { useEffectOnce, useInterval, useLocalStorage } from "usehooks-ts";
 import z from "zod";
 import Button from "../Button";
 import styles from "./style.module.scss";
@@ -17,35 +17,25 @@ const schema = z.object({
 
 type Schema = z.infer<typeof schema>;
 
-export type BlogNewProps = {
+export type BlogEditProps = {
+  defaultValues: Schema;
   onSubmit: SubmitHandler<Schema>;
 };
 
-export default function BlogNew({ onSubmit }: BlogNewProps): JSX.Element {
+export default function BlogEdit({
+  defaultValues,
+  onSubmit,
+}: BlogEditProps): JSX.Element {
   const {
     control,
     formState: { isValid },
     handleSubmit,
     register,
-    setValue,
-    watch,
   } = useForm<Schema>({
-    defaultValues: {
-      content: "",
-      title: "",
-    },
+    defaultValues,
     resolver: zodResolver(schema),
   });
   const headerHeight = useHeaderStore(({ height }) => height);
-  const [blog, setBlog] = useLocalStorage("blog", "");
-
-  useInterval(() => {
-    setBlog(watch("content"));
-  }, 10000);
-
-  useEffectOnce(() => {
-    setValue("content", blog);
-  });
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -56,7 +46,7 @@ export default function BlogNew({ onSubmit }: BlogNewProps): JSX.Element {
         <div className={styles.topBlock}>
           <Spacer grow={1} />
           <Button disabled={!isValid} type="submit">
-            保存する
+            保存
           </Button>
         </div>
         <input
