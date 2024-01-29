@@ -38,7 +38,7 @@
   "name": "admin",
   "private": true,
   "scripts": {
-    "build": "next build -p 4000",
+    "build": "next build",
     "dev": "next dev -p 4000",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
