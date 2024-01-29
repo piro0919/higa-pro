@@ -1,5 +1,6 @@
 "use server";
 import { cookies } from "next/headers";
+import { notFound } from "next/navigation";
 import microcmsClient from "@/lib/microcmsClient";
 
 export type CreateBlogParams = {
@@ -15,10 +16,14 @@ export async function createBlog({
   const cookieStore = cookies();
   const talentId = cookieStore.get("talentId");
 
+  if (typeof talentId?.value !== "string") {
+    notFound();
+  }
+
   await microcmsClient.create<MicroCMS.Blog>({
     content: {
       content,
-      talentId: talentId?.value,
+      talentId: talentId.value,
       title,
     },
     endpoint: "blogs",

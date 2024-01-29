@@ -25,7 +25,7 @@ export async function updateBlog({
   await microcmsClient.update<MicroCMS.Blog>({
     content: {
       content,
-      talentId: talentId?.value,
+      talentId: talentId.value,
       title,
     },
     contentId,
