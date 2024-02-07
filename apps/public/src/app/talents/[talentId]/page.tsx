@@ -24,7 +24,7 @@ async function getTalent({
     contentId: talentId,
     customRequestInit: {
       next: {
-        revalidate: process.env.VERCEL_ENV === "production" ? 60 * 60 : false,
+        revalidate: process.env.VERCEL_ENV === "production" ? 3600 : false,
       },
     },
     endpoint: "talents",
@@ -47,7 +47,7 @@ export async function generateMetadata({
     contentId: talentId,
     customRequestInit: {
       next: {
-        revalidate: process.env.VERCEL_ENV === "production" ? 60 * 60 : false,
+        revalidate: process.env.VERCEL_ENV === "production" ? 3600 : false,
       },
     },
     endpoint: "talents",
@@ -80,7 +80,7 @@ async function getTalentList(): Promise<GetTalentListData> {
   const response = await microcmsClient.getList<MicroCMS.Talent>({
     customRequestInit: {
       next: {
-        revalidate: process.env.VERCEL_ENV === "production" ? 60 * 60 : false,
+        revalidate: process.env.VERCEL_ENV === "production" ? 3600 : false,
       },
     },
     endpoint: "talents",

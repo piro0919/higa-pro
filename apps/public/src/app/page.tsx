@@ -8,7 +8,7 @@ async function getNewsList(): Promise<GetNewsListData> {
   const response = await microcmsClient.getList<MicroCMS.News>({
     customRequestInit: {
       next: {
-        revalidate: process.env.VERCEL_ENV === "production" ? 60 * 60 : false,
+        revalidate: process.env.VERCEL_ENV === "production" ? 3600 : false,
       },
     },
     endpoint: "news",
@@ -26,7 +26,7 @@ async function getTalentList(): Promise<GetTalentListData> {
   const response = await microcmsClient.getList<MicroCMS.Talent>({
     customRequestInit: {
       next: {
-        revalidate: process.env.VERCEL_ENV === "production" ? 60 * 60 : false,
+        revalidate: process.env.VERCEL_ENV === "production" ? 3600 : false,
       },
     },
     endpoint: "talents",
