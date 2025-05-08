@@ -37,13 +37,13 @@
   "name": "higa-pro",
   "overrides": {
     "stylelint-css-modules-no-global-scoped-selector": {
-      "stylelint": "15.7.0"
+      "stylelint": "15.11.0"
     },
     "stylelint-csstree-validator": {
-      "stylelint": "15.7.0"
+      "stylelint": "15.11.0"
     },
     "stylelint-sass-render-errors": {
-      "stylelint": "15.7.0"
+      "stylelint": "15.11.0"
     }
   },
   "private": true,
