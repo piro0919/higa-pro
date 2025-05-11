@@ -9,7 +9,7 @@
     "dayjs": "1.11.13",
     "html-to-md": "0.8.8",
     "marked": "15.0.11",
-    "microcms-js-sdk": "2.7.0",
+    "microcms-js-sdk": "3.2.0",
     "next": "14.2.28",
     "nextjs-toploader": "1.6.12",
     "react": "^18",
