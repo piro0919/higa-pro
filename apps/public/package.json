@@ -1,13 +1,13 @@
 {
   "dependencies": {
     "@hookform/error-message": "2.0.1",
-    "@hookform/resolvers": "5.1.0",
+    "@hookform/resolvers": "5.1.1",
     "@mpth/react-no-ssr": "1.0.1",
     "@react-hook/previous": "1.0.1",
     "array-sort": "1.0.0",
     "axios": "1.9.0",
     "dayjs": "1.11.13",
-    "framer-motion": "12.16.0",
+    "framer-motion": "12.18.1",
     "html-react-parser": "5.2.5",
     "i18next": "25.2.1",
     "microcms-js-sdk": "3.2.0",
@@ -30,7 +30,7 @@
     "ress": "5.0.2",
     "typewriter-effect": "2.22.0",
     "usehooks-ts": "3.1.1",
-    "zod": "3.25.56",
+    "zod": "3.25.64",
     "zod-i18n-map": "2.27.0"
   },
   "devDependencies": {
