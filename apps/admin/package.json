@@ -8,7 +8,7 @@
     "@uiw/react-md-editor": "4.0.7",
     "dayjs": "1.11.13",
     "html-to-md": "0.8.8",
-    "marked": "15.0.12",
+    "marked": "16.0.0",
     "microcms-js-sdk": "3.2.0",
     "next": "15.3.4",
     "nextjs-toploader": "3.8.16",
