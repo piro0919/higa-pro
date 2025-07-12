@@ -1,8 +1,8 @@
 {
   "dependencies": {
     "@hookform/resolvers": "5.1.1",
-    "@stytch/nextjs": "21.6.0",
-    "@stytch/vanilla-js": "5.25.1",
+    "@stytch/nextjs": "21.6.1",
+    "@stytch/vanilla-js": "5.25.2",
     "@szhsin/react-menu": "4.4.1",
     "@tanstack/react-table": "8.21.3",
     "@uiw/react-md-editor": "4.0.7",
@@ -20,9 +20,9 @@
     "react-use-measure": "2.1.7",
     "rehype-sanitize": "6.0.0",
     "ress": "5.0.2",
-    "stytch": "12.23.0",
+    "stytch": "12.25.0",
     "usehooks-ts": "3.1.1",
-    "zod": "3.25.74",
+    "zod": "3.25.76",
     "zustand": "5.0.6"
   },
   "devDependencies": {
