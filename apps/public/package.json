@@ -11,7 +11,7 @@
     "html-react-parser": "5.2.6",
     "i18next": "25.3.2",
     "microcms-js-sdk": "3.2.0",
-    "next": "15.4.5",
+    "next": "15.4.6",
     "nextjs-toploader": "3.8.16",
     "nodemailer": "7.0.5",
     "pattern.css": "1.0.0",
@@ -30,7 +30,7 @@
     "ress": "5.0.2",
     "typewriter-effect": "2.22.0",
     "usehooks-ts": "3.1.1",
-    "zod": "4.0.14",
+    "zod": "4.0.15",
     "zod-i18n-map": "2.27.0"
   },
   "devDependencies": {
