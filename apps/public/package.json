@@ -38,7 +38,7 @@
     "@types/array-sort": "1.0.4",
     "@types/capitalize": "2.0.2",
     "@types/node": "22.19.7",
-    "@types/nodemailer": "7.0.5",
+    "@types/nodemailer": "7.0.9",
     "@types/react": "19.2.9",
     "@types/react-dom": "19.2.3",
     "@types/react-hamburger-menu": "0.0.6",
