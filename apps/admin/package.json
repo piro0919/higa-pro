@@ -2,15 +2,15 @@
   "dependencies": {
     "@hookform/resolvers": "5.2.2",
     "@stytch/nextjs": "21.18.1",
-    "@stytch/vanilla-js": "5.45.0",
+    "@stytch/vanilla-js": "5.45.1",
     "@szhsin/react-menu": "4.5.1",
     "@tanstack/react-table": "8.21.3",
     "@uiw/react-md-editor": "4.0.11",
     "dayjs": "1.11.20",
     "html-to-md": "0.8.8",
-    "marked": "17.0.4",
+    "marked": "17.0.5",
     "microcms-js-sdk": "3.3.0",
-    "next": "15.5.12",
+    "next": "15.5.14",
     "nextjs-toploader": "3.9.17",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -23,7 +23,7 @@
     "stytch": "12.43.1",
     "usehooks-ts": "3.1.1",
     "zod": "4.3.6",
-    "zustand": "5.0.11"
+    "zustand": "5.0.12"
   },
   "devDependencies": {
     "@total-typescript/ts-reset": "0.6.1",
